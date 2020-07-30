@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Steganography Decoder{% endblock title %}
+
+{% block content %}
+
+<div class="w3-cell-row w3-mobile w3-padding-64">
+    <h1><a href="{{ url_for('steganography') }}">About Page</a></h1>
+    <h2><a href="{{ url_for('encode') }}">Click here to encode an image</a></h2>
+    <div class="decode">
+        <p hidden><img id="steganography" src="{{ image }}" alt="Please upload an image" width="auto" height="auto"></p>
+        <form action="/projects/steganography/decode/compute/" method="POST" enctype="multipart/form-data">
+            <br>
+            <label for="img">Select image to decode:</label>
+            <input type="file" id="img" name="img" accept="image/png" required><br><br>
+            <input class="w3-button w3-blue" type="submit">
+        </form>
+        <br><br><br>
+        <div class="w3-cell-row w3-margin-top">
+            <div class="w3-container w3-cell"></div>
+            <div class="w3-container w3-cell" style="width:80%">
+                <div class="w3-card-4 w3-center">
+
+                    <header class="w3-container w3-blue" {{ hidden }}>
+                        <h3>The message from the picture</h3>
+                    </header>
+        
+                    <div class="w3-container" {{ hidden }}>
+                        <p class="w3-margin">{{ message }}</p>
+                    </div>
+        
+                </div>
+            </div>
+            <div class="w3-container w3-cell"></div>
+        </div>
+    </div>
+</div>
+    
+{% endblock content %}

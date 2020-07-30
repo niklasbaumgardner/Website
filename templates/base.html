@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/w3.css">
+    <link rel="icon" type="image/png" href="{% block icon %}/static/images/nb.png{% endblock icon %}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <title>{% block title %}{% endblock title %}</title>
+</head>
+
+
+<body>
+    <header>
+
+        <div class="w3-top">
+            <div class="w3-bar w3-border w3-margin-bottom w3-light-grey w3-large">
+                <a class="w3-bar-item">Niklas Baumgardner</a>
+                <a class="w3-bar-item w3-button w3-mobile w3-hover-blue w3-right w3-hide-small" href="../static/documents/Niklas Baumgardner Resume.pdf" target="_blank">Resume</a>
+                <a class="w3-bar-item w3-button w3-mobile w3-hover-blue w3-right w3-hide-small" href="https://github.com/niklasbaumgardner" target="_blank">Code</a>
+                <a class="w3-bar-item w3-button w3-mobile w3-hover-blue w3-right w3-hide-small {% block contact %}{% endblock contact %}" href="{{ url_for('contact') }}">Contact</a>
+                <a class="w3-bar-item w3-button w3-mobile w3-hover-blue w3-right w3-hide-small {% block projects %}{% endblock projects %}" href="{{ url_for('projects') }}">Projects</a>
+                <a class="w3-bar-item w3-button w3-mobile w3-hover-blue w3-right w3-hide-small {% block home %}{% endblock home %}" href="/">Home</a>
+                <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="myFunction()">&#9776;</a>
+            </div>
+            
+            <div id="side" class="w3-bar-block w3-light-grey w3-hide w3-hide-large w3-hide-medium">
+                <a class="w3-bar-item w3-button w3-hover-blue w3-right {{ self.home() }}" href="/">Home</a>
+                <a class="w3-bar-item w3-button w3-hover-blue w3-right {{ self.projects() }}" href="{{ url_for('projects') }}">Projects</a>
+                <a class="w3-bar-item w3-button w3-hover-blue w3-right {{ self.contact() }}" href="{{ url_for('contact') }}">Contact</a>
+                <a class="w3-bar-item w3-button w3-hover-blue w3-right" href="https://github.com/niklasbaumgardner" target="_blank">Code</a>
+                <a class="w3-bar-item w3-button w3-hover-blue w3-right" href="../static/documents/Niklas Baumgardner Resume.pdf" target="_blank">Resume</a>
+            </div>
+        </div>
+        
+        <script>
+            function myFunction() {
+                var x = document.getElementById("side");
+                if (x.className.indexOf("w3-show") == -1) {
+                    x.className += " w3-show";
+                } else { 
+                    x.className = x.className.replace(" w3-show", "");
+                }
+            }
+        </script>
+
+    </header>
+
+          
+
+    {% block content %}{% endblock content %}
+
+
+    <!-- <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/skel.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script> -->
+    
+</body>
+</html>

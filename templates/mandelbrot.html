@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+
+{% block title %}Mandelbrot{% endblock title %}
+
+{% block content %}
+
+<div class="w3-cell-row w3-margin-top w3-mobile w3-padding-64">
+    <!-- <div class="w3-cell-row"></div> -->
+    
+    <!-- <div class="w3-card"> -->
+        <img src="{{ image }}" style="width:100%;max-width:500px" onclick="document.getElementById('modal01').style.display='block'" class="w3-image w3-hover-opacity">
+    <!-- </div> -->
+
+    
+    <div id="modal01" class="w3-modal w3-animate-zoom" onclick="this.style.display='none'">
+        <img class="w3-modal-content w3-margin" src="{{ image }}">
+    </div>
+
+    
+    <p>Add ability to change resolution</p>
+
+    <div class="w3-cell-row w3-margin-top w3-margin-bottom w3-mobile">
+        <div class="w3-container w3-cell w3-mobile" style="width:30%"></div>
+        <div class="w3-container w3-cell w3-cell-bottom w3-mobile w3-margin-top w3-margin-bottom">
+            <div class="w3-margin">
+                <p class="w3-margin">Current Real Value: {{ real }}</p>
+
+                <label for="real">Real Number: </label>
+                <input type="text" pattern="-?\d*\.?\d*" form="m_form" id="real" name="real" value="0" required>
+            </div>
+        </div>
+
+        <div class="w3-container w3-cell w3-cell-bottom w3-mobile w3-margin-top w3-margin-bottom">
+            <div class="w3-margin">
+                <p class="w3-margin">Current Imaginary Value: {{ imag }}</p>
+
+                <label for="imaginary">Imaginary Number: </label>
+                <input type="text" pattern="-?\d*\.?\d*" form="m_form" id="imaginary" name="imaginary" value="0" required>
+            </div>
+        </div>
+        <div class="w3-container w3-cell w3-mobile" style="width:30%"></div>
+    </div>
+
+    <div class="w3-cell-row w3-margin-bottom">
+        <div class="w3-container w3-cell w3-margin-bottom" style="width:50%">
+            <div class="w3-right w3-margin-bottom">
+                <form id="m_form" action="/projects/mandelbrot/calculate/" method="post">
+                    <input hidden type="text" id="r" name="r" value="{{ real }}">
+                    <input hidden type="text" id="i" name="i" value="{{ imag }}">
+                    <input class="w3-button w3-blue w3-right" type="submit" id="go" name="go" value="Go">
+                </form>
+            </div>
+        </div>
+
+        <div class="w3-container w3-cell w3-margin-bottom" style="width:50%">
+            <div class="w3-left w3-margin-bottom">
+                <form action="/projects/mandelbrot/calculate/" method="POST">
+                    <input class="w3-button w3-blue w3-left" type="submit" id="rand" name="rand" value="Random">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}  

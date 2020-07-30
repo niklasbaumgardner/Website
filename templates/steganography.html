@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Steganography{% endblock title %}
+
+{% block content %}
+    <div class="w3-cell-row w3-mobile w3-padding-64">
+        <div class="w3-container w3-cell" style="width:20%"></div>
+        <div class="w3-container w3-cell w3-cell-bottom w3-mobile w3-margin-top w3-margin-bottom">
+            <h2>About Steganography</h2>
+            <div class="w3-panel w3-border">
+                <p>Steganography is the practice of hiding secret information within a non secret object. In this example I created, 
+                    you are able to encode text within an image and then later decode that text from the image.
+                </p>
+            </div>
+            <h6><a href="{{ url_for('encode') }}">Click here to encode an image</a></h6>
+            <h6><a href="{{ url_for('decode') }}">Click here to decode an image</a></h6>
+        </div>
+        <div class="w3-container w3-cell" style="width:20%"></div>
+    </div>
+{% endblock content %}
