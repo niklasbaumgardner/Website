@@ -26,30 +26,25 @@ def calc_pixel(w, h, ZOOM, PIXEL_SCALE, XSTART, YSTART, MAX_ITER, initial_z):
 
 
 def create(real=0, imag=0, zoom=1.2, p_scale=200):
-    # TODO: Higher number to zoom in
+    
     ZOOM = zoom # default = 1
 
-    # TODO: Can change PIXEL_SCALE to make higher resolution images
     # minimun of 200
     PIXEL_SCALE = 400 * ZOOM
     WIDTH = 3 / ZOOM
     HEIGHT = 3 / ZOOM
 
-    # TODO: These values have to be changed when you zoom in. Kinda trick to figure out. 
-    # I just guess and check
     # XSTART = -2 # default = -2
     # YSTART = -1.5 # default = -1.5
     XSTART = -2 / 1.2
     YSTART = -1.5 / 1.2
 
-    # TODO: Can change. The highed the number the sharper the image is
-    # I would keep between 100 and 1000
+    # Number of iterations for calculating whether point is convergent
     MAX_ITER = 100
 
     image_width = int(PIXEL_SCALE*WIDTH)
     image_height = int(PIXEL_SCALE*HEIGHT)
 
-    # TODO: We have to try more random numbers here # default = 0
     # initial_z = complex(-.6506302876687291, .3550966973478127) # zoom=60, x=-.76, y=.24
     # initial_z = complex(-.2826053590620101, .6285527181661623) # need to zoom
     # initial_z = complex(0.03400854576513822, -0.6275409288083754) # need to zoom
