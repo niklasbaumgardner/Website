@@ -1,7 +1,7 @@
 from flask import Flask, escape, request, render_template, url_for, redirect
 # from bs4 import BeautifulSoup as bs
 from numpy import random as rand
-import mandelbrot_v2 as mandel
+import mandelbrot as mandel
 import steganography as steg
 
 app = Flask(__name__)
@@ -11,15 +11,15 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/projects/mandelbrot/', methods=["POST", "GET"])
+@app.route('/projects/mandelbrot/', methods=["GET"])
 def mandelbrot():
 
     if 'r' in request.values and 'i' in request.values:
         real = float(request.values['r'])
         imaginary = float(request.values['i'])
 
-        if 'm' in request.values:
-            return render_template("mandelbrot.html", image='/static/images/fractal.png', real=real, imag=imaginary)
+        # if 'm' in request.values:
+        #     return render_template("mandelbrot.html", image='/static/images/fractal.png', real=real, imag=imaginary)
         
         if 'd' in request.values:
             return render_template("mandelbrot.html", image='/static/images/defaultFractal.png', real=real, imag=imaginary)
@@ -43,26 +43,28 @@ def calculate():
         real = rand.rand() * ((-1) ** rand.randint(2))
         imaginary = rand.rand() * ((-1) ** rand.randint(2))
 
-    r = None
-    i = None
-    if 'r' in request.form:
-        r = float(request.form['r'])
+    # r = None
+    # i = None
+    # size = None
+    # if 'r' in request.form:
+    #     r = float(request.form['r'])
 
-    if 'i' in request.form:
-        i = float(request.form['i'])
-    print(r, real)
-    print(i, imaginary)
+    # if 'i' in request.form:
+    #     i = float(request.form['i'])
+
+    # print(r, real)
+    # print(i, imaginary)
 
     if real == 0 and imaginary == 0:
         return redirect(url_for('mandelbrot', r=real, i=imaginary, d='d'))
 
-    if real == r and imaginary == i:
-        return redirect(url_for('mandelbrot', r=real, i=imaginary, m='m'))
+    # if real == r and imaginary == i:
+    #     return redirect(url_for('mandelbrot', r=real, i=imaginary, m='m'))
 
     return redirect(url_for('mandelbrot', r=real, i=imaginary))
 
     
-@app.route("/projects/steganography/", methods=["POST", "GET"])
+@app.route("/projects/steganography/", methods=["GET"])
 def steganography():
     
     return render_template("steganography.html")

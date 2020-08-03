@@ -25,13 +25,13 @@ def calc_pixel(w, h, ZOOM, PIXEL_SCALE, XSTART, YSTART, MAX_ITER, initial_z):
     return 0
 
 
-def create(real=0, imag=0, zoom=1.2):
+def create(real=0, imag=0, zoom=1.2, p_scale=200):
     # TODO: Higher number to zoom in
     ZOOM = zoom # default = 1
 
     # TODO: Can change PIXEL_SCALE to make higher resolution images
     # minimun of 200
-    PIXEL_SCALE = 334 * ZOOM
+    PIXEL_SCALE = 400 * ZOOM
     WIDTH = 3 / ZOOM
     HEIGHT = 3 / ZOOM
 
