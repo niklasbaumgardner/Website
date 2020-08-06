@@ -5,16 +5,29 @@
 {% block content %}
     <div class="w3-cell-row w3-mobile w3-padding-64">
         <div class="w3-container w3-cell" style="width:20%"></div>
-        <div class="w3-container w3-cell w3-cell-bottom w3-mobile w3-margin-top w3-margin-bottom">
+        <div class="w3-container w3-cell w3-cell-bottom w3-mobile w3-margin-top">
             <h2>About Steganography</h2>
-            <div class="w3-panel w3-border">
-                <p>Steganography is the practice of hiding secret information within a non secret object. In this example I created, 
+            <br>
+            <div class="w3-panel w3-border w3-light-grey">
+                <p class="w3-padding w3-padding-16">Steganography is the practice of hiding secret information within a non secret object. In this example I created, 
                     you are able to encode text within an image and then later decode that text from the image.
+                    This works by changing each character from the message into it's Unicode value and then converting it to binary.
+                    I now have the message in binary and I will iterate through the image change the least significant bit of each RGB value
+                    to match the bit of the according bit of the binary message. This changes the message ever so slightly that it isn't noticable by the eye.
                 </p>
             </div>
-            <h6><a href="{{ url_for('encode') }}">Click here to encode an image</a></h6>
-            <h6><a href="{{ url_for('decode') }}">Click here to decode an image</a></h6>
+            
         </div>
+        <div class="w3-container w3-cell" style="width:20%"></div>
+    </div>
+    <div class="w3-cell-row w3-mobile w3-margin-bottom">
+        <div class="w3-container w3-cell" style="width:20%"></div>
+        <div class="w3-container w3-mobile w3-cell w3-margin-top" style="width:30%">
+            <h4 class="w3-center w3-text-blue"><a href="{{ url_for('encode') }}">Click here to encode an image</a></h4>
+        </div>
+        <div class="w3-container w3-mobile w3-cell w3-margin-top" style="width:30%">
+            <h4 class="w3-center w3-text-blue"><a href="{{ url_for('decode') }}">Click here to decode an image</a></h4>
+        </div>           
         <div class="w3-container w3-cell" style="width:20%"></div>
     </div>
 {% endblock content %}

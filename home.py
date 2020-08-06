@@ -70,20 +70,15 @@ def steganography():
     return render_template("steganography.html")
 
 
-@app.route("/projects/steganography/encode/", methods=["POST", "GET"])
+@app.route("/projects/steganography/encode/", methods=["GET"])
 def encode():
     img = '/static/images/steganography.png?' + str(rand.randint(1000))
     # message = ''
-    hidden = 'hidden'
-    if request.method == 'GET':
-        if 'show' in request.values:
-            hidden = ''
-    # if request.method == "GET":
-    #     if 'img' in request.form:
-    #         img = '../static/steganography.png' + str(rand.randint(1000))
-    # img = request.form.get('img')
-    # print(img)
-    return render_template("encode.html", image=img, hidden=hidden)
+    show = False
+    if 'show' in request.values and request.values['show'] == 'True':
+        show = True
+    
+    return render_template("encode.html", image=img, show=show)
 
 
 @app.route("/projects/steganography/encode/compute/", methods=["POST", "GET"])
@@ -93,11 +88,12 @@ def encode_compute():
     if not message or not image:
         return redirect(url_for('encode'))
     image.save('static/images/steganography.png')
+    print('saved')
 
     binary_string = steg.encode_string(message)
     steg.encode_image('static/images/steganography.png', binary_string)
     
-    return redirect(url_for('encode', show='1'))
+    return redirect(url_for('encode', show='True'))
 
 
 @app.route("/projects/steganography/decode/", methods=["GET"])

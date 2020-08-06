@@ -5,30 +5,52 @@
 {% block content %}
 
 <div class="w3-cell-row w3-mobile w3-padding-64">
-    <h1><a href="{{ url_for('steganography') }}">About Page</a></h1>
-    <h2><a href="{{ url_for('decode') }}">Click here to decode an image</a></h2>
-    <div class="encode">
-        <div {{ hidden }}>
+
+    <div class="w3-container w3-cell" style="width:25%"></div>
+    <div class="w3-container w3-cell w3-cell-bottom w3-mobile w3-margin-top">
+        <h1><a href="{{ url_for('steganography') }}">About Page</a></h1>
+        <h3 class="w3-text-blue"><a href="{{ url_for('decode') }}">Click here to decode an image</a></h3>
+        <div class="w3-panel w3-border w3-light-grey">
+            <p class="w3-padding w3-padding-16">
+                Select an image you would like to use and then type the message you want to encode.
+                <br>
+                After hitting submit the image will appear and you will be able to download the encoded image.
+            </p>
+        </div>
+    </div>
+    <div class="w3-container w3-cell" style="width:25%"></div>
+</div>
+
+<div class="w3-cell-row w3-mobile">
+    <div class="w3-container w3-cell" style="width:25%"></div>
+    <!-- <div {{ hidden }}>
+        <p><a href="{{ image }}" download>
+            <img class="w3=padding" id="steganography" style="width:100%;max-width:500px" src="{{ image }}" alt="Please upload an image" width="auto" height="auto">
+        </a></p>
+        <p>Click the image to download</p>
+    </div> -->
+    <div class="w3-container w3-cell w3-cell-bottom w3-mobile">
+        {% if show %}
             <p><a href="{{ image }}" download>
-                <img id="steganography" style="width:100%;max-width:500px" src="{{ image }}" alt="Please upload an image" width="auto" height="auto">
+                <img class="w3=padding" id="steganography" style="width:100%;max-width:500px" src="{{ image }}" alt="Please upload an image" width="auto" height="auto">
             </a></p>
             <p>Click the image to download</p>
-            <!-- <button download="{{ image }}">Click to download image</button> -->
-        </div>
-        <div>
+            <br><br><br>
+            <a class="w3-button w3-light-grey" href="{{ url_for('encode') }}">Encode Another Image</a>
+        {% else %}
             <form class="w3-container" action="/projects/steganography/encode/compute/" method="POST" enctype="multipart/form-data">
                 <br>
                 <label for="img">Select image to encode:</label>
                 <input type="file" id="img" name="img" accept="image/png, image/jpeg" required><br><br>
                 
                 <div>
-                    <textarea id="message" name="message" value="{{ message }}" rows="5" required></textarea><br>
+                    <textarea id="message" name="message" value="" rows="5" placeholder="Message to be encoded" style="width:100%" required></textarea><br>
                     <input class="w3-button w3-blue w3-margin-bottom" type="submit">
                 </div>
             </form>
-        </div>
-        
+        {% endif %}
     </div>
+    <div class="w3-container w3-cell" style="width:25%"></div>
 </div>
-    
+<br><br>
 {% endblock content %}
