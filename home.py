@@ -1,4 +1,4 @@
-from flask import Flask, escape, request, render_template, url_for, redirect, after_this_request, send_file, session
+from flask import Flask, escape, request, render_template, url_for, redirect, session
 # from bs4 import BeautifulSoup as bs
 from numpy import random as rand
 import mandelbrot as mandel
