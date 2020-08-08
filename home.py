@@ -1,33 +1,44 @@
-from flask import Flask, escape, request, render_template, url_for, redirect
+from flask import Flask, escape, request, render_template, url_for, redirect, after_this_request, send_file, session
 # from bs4 import BeautifulSoup as bs
 from numpy import random as rand
 import mandelbrot as mandel
 import steganography as steg
+import os
+from apscheduler.schedulers.background import BackgroundScheduler
+import datetime
+import uuid
 
 app = Flask(__name__)
+app.secret_key = os.urandom(24)
+
+scheduler = BackgroundScheduler()
+scheduler.start()
 
 
-@app.route('/')
+@app.route('/', methods=["GET"])
 def index():
     return render_template('index.html')
 
 @app.route('/projects/mandelbrot/', methods=["GET"])
 def mandelbrot():
+    try:
+        session['uid']
+    except:
+        session['uid'] = uuid.uuid4()
 
     if 'r' in request.values and 'i' in request.values:
         real = float(request.values['r'])
         imaginary = float(request.values['i'])
-
-        # if 'm' in request.values:
-        #     return render_template("mandelbrot.html", image='/static/images/fractal.png', real=real, imag=imaginary)
-        
-        if 'd' in request.values:
-            return render_template("mandelbrot.html", image='/static/images/defaultFractal.png', real=real, imag=imaginary)
         
         image = mandel.create(real, imaginary)
-        image.save('static/images/fractal.png')
+        filename = 'static/images/' + str(session['uid']) + 'fractal.png'
+        # image.save('static/images/fractal.png')
+        image.save(filename)
 
-        return render_template("mandelbrot.html", image='/static/images/fractal.png?' + str(rand.randint(1000)), real=real, imag=imaginary)
+        time = datetime.datetime.now() + datetime.timedelta(minutes = 1)
+        scheduler.add_job(delete_file, args=[filename], trigger='date', run_date=time, id=filename)
+
+        return render_template("mandelbrot.html", image='/' + filename + '?' + str(rand.randint(1000)), real=real, imag=imaginary)
 
     else:
         return render_template("mandelbrot.html", image='/static/images/defaultFractal.png', real=0, imag=0)
@@ -43,23 +54,8 @@ def calculate():
         real = rand.rand() * ((-1) ** rand.randint(2))
         imaginary = rand.rand() * ((-1) ** rand.randint(2))
 
-    # r = None
-    # i = None
-    # size = None
-    # if 'r' in request.form:
-    #     r = float(request.form['r'])
-
-    # if 'i' in request.form:
-    #     i = float(request.form['i'])
-
-    # print(r, real)
-    # print(i, imaginary)
-
     if real == 0 and imaginary == 0:
-        return redirect(url_for('mandelbrot', r=real, i=imaginary, d='d'))
-
-    # if real == r and imaginary == i:
-    #     return redirect(url_for('mandelbrot', r=real, i=imaginary, m='m'))
+        return redirect(url_for('mandelbrot'))
 
     return redirect(url_for('mandelbrot', r=real, i=imaginary))
 
@@ -72,63 +68,73 @@ def steganography():
 
 @app.route("/projects/steganography/encode/", methods=["GET"])
 def encode():
-    img = '/static/images/steganography.png?' + str(rand.randint(1000))
-    # message = ''
+    try:
+        session['uid']
+    except:
+        session['uid'] = uuid.uuid4()
+
+    img = ''
     show = False
     if 'show' in request.values and request.values['show'] == 'True':
         show = True
+        img = '/' + session['steganography_image'] + '?' + str(rand.randint(1000))
     
     return render_template("encode.html", image=img, show=show)
 
 
-@app.route("/projects/steganography/encode/compute/", methods=["POST", "GET"])
+@app.route("/projects/steganography/encode/compute/", methods=["POST"])
 def encode_compute():
     message = request.form['message']
     image = request.files['img']
     if not message or not image:
         return redirect(url_for('encode'))
-    image.save('static/images/steganography.png')
-    print('saved')
-
+    
+    filename = 'static/images/' + str(session['uid']) + image.filename.split('.')[0] + '.png'
+    image.save(filename)
+    session['steganography_image'] = filename
+    
     binary_string = steg.encode_string(message)
-    steg.encode_image('static/images/steganography.png', binary_string)
+    image = steg.encode_image(filename, binary_string)
+
+    time = datetime.datetime.now() + datetime.timedelta(minutes = 1)
+    scheduler.add_job(delete_file, args=[filename], trigger='date', run_date=time, id=filename)
     
     return redirect(url_for('encode', show='True'))
+
+def delete_file(filename):
+    os.remove(filename)
+    print(f'{filename} deleted')
 
 
 @app.route("/projects/steganography/decode/", methods=["GET"])
 def decode():
     hidden = 'hidden'
     message = ''
-    # if request.method == 'POST':
-        # print('post')
+    
     if 'message' in request.values:
-        # print(request.values['message'])
         message = request.values['message']
         hidden = ''
         
     return render_template("decode.html", hidden=hidden, message=message)
 
 
-@app.route("/projects/steganography/decode/compute/", methods=["POST", "GET"])
+@app.route("/projects/steganography/decode/compute/", methods=["POST"])
 def decode_compute():
     image = request.files['img']
     if not image:
         return redirect(url_for('decode'))
-    # image.save('static/steganography.png')
-
+    
     binary_string = steg.decode_image(image)
     message = steg.decode_string(binary_string)
 
-    # return redirect(url_for('decode', _method="POST", message=message))
     return redirect(url_for('decode', message=message))
 
 
-@app.route("/projects/", methods=["POST", "GET"])
+@app.route("/projects/", methods=["GET"])
 def projects():
     return render_template("projects.html")
 
-@app.route("/contact/", methods=["POST", "GET"])
+@app.route("/contact/", methods=["GET"])
 def contact():
     return render_template("contact.html")
 
@@ -140,6 +146,11 @@ def contact():
 # export FLASK_APP=home.py
 # flask run
 
+
+# $site->dbConfigure('mysql:host=mysql-user.cse.msu.edu;dbname=baumga91',
+#         'baumga91',       // Database user
+#         'password',     // Database password
+#         '');            // Table prefix
 
 
 if __name__ == '__main__':

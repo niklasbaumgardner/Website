@@ -83,6 +83,7 @@ def encode_image(image, bi_string):
     # TODO: change this
     # new_image = str(image[:-4] + "encoded.png")
     im.save(image)
+    im.close()
     return im
 
 
@@ -107,7 +108,7 @@ def decode_image(image):
             if '010000110111010001110010011011000010110101000100' in bi_string:
                 return bi_string
 
-    return bi_string
+    return 'No message was found'
 
 
 def to_decimal(num):
