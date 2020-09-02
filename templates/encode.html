@@ -4,12 +4,12 @@
 
 {% block content %}
 
-<div class="w3-cell-row w3-mobile w3-padding-64">
+<div class="w3-cell-row w3-mobile" style="padding-top: 64px;">
 
     <div class="w3-container w3-cell" style="width:25%"></div>
     <div class="w3-container w3-cell w3-cell-bottom w3-mobile w3-margin-top">
-        <h1><a href="{{ url_for('steganography') }}">About Page</a></h1>
-        <h3 class="w3-text-blue"><a href="{{ url_for('decode') }}">Click here to decode an image</a></h3>
+        <!-- <h2><a href="{{ url_for('steganography') }}">About Page</a></h2> -->
+        <!-- <h3 class="w3-text-blue"><a href="{{ url_for('decode') }}">Click here to decode an image</a></h3> -->
         <div class="w3-panel w3-border w3-light-grey">
             <p class="w3-padding w3-padding-16">
                 Select an image you would like to use and then type the message you want to encode.
@@ -23,12 +23,6 @@
 
 <div class="w3-cell-row w3-mobile">
     <div class="w3-container w3-cell" style="width:25%"></div>
-    <!-- <div {{ hidden }}>
-        <p><a href="{{ image }}" download>
-            <img class="w3=padding" id="steganography" style="width:100%;max-width:500px" src="{{ image }}" alt="Please upload an image" width="auto" height="auto">
-        </a></p>
-        <p>Click the image to download</p>
-    </div> -->
     <div class="w3-container w3-cell w3-cell-bottom w3-mobile">
         {% if show %}
             <p><a href="{{ image }}" download>
@@ -36,7 +30,8 @@
             </a></p>
             <p>Click the image to download</p>
             <br><br><br>
-            <a class="w3-button w3-light-grey" href="{{ url_for('encode') }}">Encode Another Image</a>
+            <a class="w3-button w3-light-grey" href="{{ url_for('encode') }}">Encode another image</a>
+            <a class="w3-button w3-light-blue" href="{{ url_for('decode') }}">Decode this or another image</a>
 
         {% else %}
             <form class="w3-container" action="/projects/steganography/encode/compute/" method="POST" enctype="multipart/form-data">
