@@ -8,6 +8,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 import datetime
 import uuid
 
+
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
@@ -26,6 +27,13 @@ def mandelbrot():
     except:
         session['uid'] = uuid.uuid4()
 
+    # filename, real, imaginary = controller.Mandelbrot(request.values, str(session['uid']))
+
+    # if filename:
+    #     return render_template("mandelbrot.html", image='/' + filename + '?' + str(rand.randint(1000)), real=real, imag=imaginary)
+    # else:
+    #     return render_template("mandelbrot.html", image='/static/images/defaultFractal.png', real=0, imag=0)
+
     if 'r' in request.values and 'i' in request.values:
         real = float(request.values['r'])
         imaginary = float(request.values['i'])
@@ -35,8 +43,13 @@ def mandelbrot():
         # image.save('static/images/fractal.png')
         image.save(filename)
 
-        time = datetime.datetime.now() + datetime.timedelta(minutes = 1)
-        scheduler.add_job(delete_file, args=[filename], trigger='date', run_date=time, id=filename)
+        time = datetime.datetime.now() + datetime.timedelta(seconds = 10)
+        if scheduler.get_job(filename):
+            scheduler.reschedule_job(job_id=filename, trigger='date', run_date=time)
+            print(f'job rescheduled for {time}')
+        else:
+            scheduler.add_job(delete_file, args=[filename], trigger='date', run_date=time, id=filename)
+            print(f'job scheduled for {time}')
 
         return render_template("mandelbrot.html", image='/' + filename + '?' + str(rand.randint(1000)), real=real, imag=imaginary)
 
@@ -58,6 +71,11 @@ def calculate():
         return redirect(url_for('mandelbrot'))
 
     return redirect(url_for('mandelbrot', r=real, i=imaginary))
+    # real, imaginary = controller.MandelbrotCalculate(request.form)
+    # if real and imaginary:
+    #     return redirect(url_for('mandelbrot', r=real, i=imaginary))
+    # else:
+    #     return redirect(url_for('mandelbrot'))
 
     
 @app.route("/projects/steganography/", methods=["GET"])
@@ -96,8 +114,13 @@ def encode_compute():
     binary_string = steg.encode_string(message)
     image = steg.encode_image(filename, binary_string)
 
-    time = datetime.datetime.now() + datetime.timedelta(minutes = 1)
-    scheduler.add_job(delete_file, args=[filename], trigger='date', run_date=time, id=filename)
+    time = datetime.datetime.now() + datetime.timedelta(minutes = 4)
+    if scheduler.get_job(filename):
+        scheduler.reschedule_job(job_id=filename, trigger='date', run_date=time)
+        print(f'job rescheduled for {time}')
+    else:
+        scheduler.add_job(delete_file, args=[filename], trigger='date', run_date=time, id=filename)
+        print(f'job scheduled for {time}')
     
     return redirect(url_for('encode', show='True'))
 
@@ -155,4 +178,5 @@ def contact():
 
 if __name__ == '__main__':
     app.run(debug=True)
+    app.run()
 
