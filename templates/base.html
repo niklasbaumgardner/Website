@@ -20,7 +20,7 @@
                 <a href="/" class="w3-bar-item" style="text-decoration: none;">Niklas Baumgardner</a>
                 <a class="w3-bar-item w3-button w3-mobile w3-hover-blue w3-right w3-hide-small" href="../static/documents/Niklas Baumgardner Resume.pdf" target="_blank">Resume</a>
                 <a class="w3-bar-item w3-button w3-mobile w3-hover-blue w3-right w3-hide-small" href="https://github.com/niklasbaumgardner" target="_blank">Code</a>
-                <a class="w3-bar-item w3-button w3-mobile w3-hover-blue w3-right w3-hide-small {% block contact %}{% endblock contact %}" href="{{ url_for('contact') }}">Contact</a>
+                <!-- <a class="w3-bar-item w3-button w3-mobile w3-hover-blue w3-right w3-hide-small {% block contact %}{% endblock contact %}" href="{{ url_for('contact') }}">Contact</a> -->
                 <a class="w3-bar-item w3-button w3-mobile w3-hover-blue w3-right w3-hide-small {% block projects %}{% endblock projects %}" href="{{ url_for('projects') }}">Projects</a>
                 <a class="w3-bar-item w3-button w3-mobile w3-hover-blue w3-right w3-hide-small {% block home %}{% endblock home %}" href="/">Home</a>
                 <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="myFunction()">&#9776;</a>
@@ -29,7 +29,7 @@
             <div id="side" class="w3-bar-block w3-light-grey w3-hide w3-hide-large w3-hide-medium">
                 <a class="w3-bar-item w3-button w3-hover-blue w3-right {{ self.home() }}" href="/">Home</a>
                 <a class="w3-bar-item w3-button w3-hover-blue w3-right {{ self.projects() }}" href="{{ url_for('projects') }}">Projects</a>
-                <a class="w3-bar-item w3-button w3-hover-blue w3-right {{ self.contact() }}" href="{{ url_for('contact') }}">Contact</a>
+                <!-- <a class="w3-bar-item w3-button w3-hover-blue w3-right {{ self.contact() }}" href="{{ url_for('contact') }}">Contact</a> -->
                 <a class="w3-bar-item w3-button w3-hover-blue w3-right" href="https://github.com/niklasbaumgardner" target="_blank">Code</a>
                 <a class="w3-bar-item w3-button w3-hover-blue w3-right" href="../static/documents/Niklas Baumgardner Resume.pdf" target="_blank">Resume</a>
             </div>
@@ -48,15 +48,28 @@
 
     </header>
 
-          
+    <!-- <div class="parallax"></div> -->
 
-    {% block content %}{% endblock content %}
+    <div class="wrapper">
+        {% block content %}{% endblock content %}
+    </div>
 
+    <div class="push"><div class="parallax"></div></div>
 
-    <!-- <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/skel.min.js"></script>
-    <script src="assets/js/util.js"></script>
-    <script src="assets/js/main.js"></script> -->
+    <footer class="footer">
+        <div class="parallax">
+            <a class="w3-margin" href="mailto:baumga91@msu.edu" target="_blank" style="text-decoration: none;">
+                <i class="fa fa-envelope" style="font-size:20px;color:#0082ad"></i>
+            </a>
+            <a class="w3-margin" href="https://www.linkedin.com/in/niklasbaumgardner/" target="_blank" style="text-decoration: none;">
+                <i class="fa fa-linkedin" style="font-size:20px;color:#0072b1"></i>
+            </a>
+            <a class="w3-margin" href="https://www.instagram.com/niklasbaumgardner/" target="_blank" style="text-decoration: none;">
+                <i class="fa fa-instagram" style="font-size:20px;color:#3f729b"></i>
+            </a>
+        </div>
+        
+    </footer>
     
 </body>
 </html>

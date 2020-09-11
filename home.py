@@ -27,13 +27,6 @@ def mandelbrot():
     except:
         session['uid'] = uuid.uuid4()
 
-    # filename, real, imaginary = controller.Mandelbrot(request.values, str(session['uid']))
-
-    # if filename:
-    #     return render_template("mandelbrot.html", image='/' + filename + '?' + str(rand.randint(1000)), real=real, imag=imaginary)
-    # else:
-    #     return render_template("mandelbrot.html", image='/static/images/defaultFractal.png', real=0, imag=0)
-
     if 'r' in request.values and 'i' in request.values:
         real = float(request.values['r'])
         imaginary = float(request.values['i'])
@@ -71,12 +64,7 @@ def calculate():
         return redirect(url_for('mandelbrot'))
 
     return redirect(url_for('mandelbrot', r=real, i=imaginary))
-    # real, imaginary = controller.MandelbrotCalculate(request.form)
-    # if real and imaginary:
-    #     return redirect(url_for('mandelbrot', r=real, i=imaginary))
-    # else:
-    #     return redirect(url_for('mandelbrot'))
-
+    
     
 @app.route("/projects/steganography/", methods=["GET"])
 def steganography():
