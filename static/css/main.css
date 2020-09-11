@@ -26,28 +26,36 @@ h2 {
     font-size: x-large;
 }
 
-/* input#go, input#rand {
-    padding: .0em 2em;
-} */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+.wrapper {
+    min-height: 100%;
 
-
-div.Mandelbrot {
-    margin: auto;
-    margin-top: 2.5em;
-    margin-bottom: 15em;
-    text-align: center;
+  /* Equal to height of footer */
+  /* But also accounting for potential margin-bottom of last child */
+    margin-bottom: -50px;
+}
+.footer {
+    height: 50px;
+    max-height: 50px;
+}
+.push {
+    max-height: 50px;
+    height: 50px;
 }
 
-img#steganography {
-    max-width: 800px;
-    max-height: 800px;
-}
+.parallax {
+    /* The image used */
+    background-image: url('../images/sky.jpg');
 
-.encode, .decode {
-    align-content: center;
-    text-align: center;
-}
+    /* Full height */
+    height: 100%; 
 
-#message {
-    width: 20em;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
