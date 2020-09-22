@@ -4,82 +4,51 @@
 
 {% block content %}
 
-<!-- <div class="w3-cell-row w3-mobile w3-padding-64">
-    <h1><a href="{{ url_for('steganography') }}">About Page</a></h1>
-    <h2><a href="{{ url_for('encode') }}">Click here to encode an image</a></h2>
-    <div class="decode">
-        <p hidden><img id="steganography" src="{{ image }}" alt="Please upload an image" width="auto" height="auto"></p>
-        <form action="/projects/steganography/decode/compute/" method="POST" enctype="multipart/form-data">
-            <br>
-            <label for="img">Select image to decode:</label>
-            <input type="file" id="img" name="img" accept="image/png" required><br><br>
-            <input class="w3-button w3-blue" type="submit">
-        </form>
-        <br><br><br>
-        <div class="w3-cell-row w3-margin-top">
-            <div class="w3-container w3-cell"></div>
-            <div class="w3-container w3-cell" style="width:80%">
-                <div class="w3-card-4 w3-center">
 
-                    <header class="w3-container w3-blue" {{ hidden }}>
-                        <h3>The message from the picture</h3>
+    <div class="w3-cell-row w3-mobile w3-padding-64">
+
+        <div class="w3-container w3-cell" style="width:25%"></div>
+        <div class="w3-container w3-cell w3-cell-bottom w3-mobile w3-margin-top">
+            <h1><a href="{{ url_for('steganography') }}">About Page</a></h1>
+            <h3 class="w3-text-blue"><a href="{{ url_for('encode') }}">Click here to encode an image</a></h3>
+            <div class="w3-panel w3-border w3-light-grey">
+                <p class="w3-padding w3-padding-16">
+                    Select an image you would like to decode.
+                    <br>
+                    ** Only images previously encoded on will work. **
+                </p>
+            </div>
+        </div>
+        <div class="w3-container w3-cell" style="width:25%"></div>
+    </div>
+
+    <div class="w3-cell-row w3-mobile">
+        <div class="w3-container w3-cell" style="width:25%"></div>
+        <div class="w3-container w3-cell w3-cell-bottom w3-mobile">
+            {% if message %}
+                <div class="w3-card w3-border">
+                    <header class="w3-container w3-light-grey w3-border-bottom">
+                        <h3>Decoded message</h3>
                     </header>
         
-                    <div class="w3-container" {{ hidden }}>
-                        <p class="w3-margin">{{ message }}</p>
+                    <div class="w3-container">
+                        <p class="w3-margin">'{{ message }}'</p>
                     </div>
-        
                 </div>
-            </div>
-            <div class="w3-container w3-cell"></div>
+                <br><br><br>
+                <a class="w3-button w3-blue" href="{{ url_for('decode') }}">Decode Another Image</a>
+            {% else %}
+                <form action="{{ url_for('decode_compute') }}" method="POST" enctype="multipart/form-data">
+                    <br>
+                    <label for="img">Select image to decode:</label>
+                    <input type="file" id="img" name="img" accept="image/png" required><br><br>
+                    <input class="w3-button w3-blue" type="submit">
+                </form>
+            {% endif %}
         </div>
+        <div class="w3-container w3-cell" style="width:25%"></div>
     </div>
-</div> -->
+    <br><br><br><br>
 
-
-<div class="w3-cell-row w3-mobile w3-padding-64">
-
-    <div class="w3-container w3-cell" style="width:25%"></div>
-    <div class="w3-container w3-cell w3-cell-bottom w3-mobile w3-margin-top">
-        <h1><a href="{{ url_for('steganography') }}">About Page</a></h1>
-        <h3 class="w3-text-blue"><a href="{{ url_for('encode') }}">Click here to encode an image</a></h3>
-        <div class="w3-panel w3-border w3-light-grey">
-            <p class="w3-padding w3-padding-16">
-                Select an image you would like to decode.
-                <br>
-                ** Only images previously encoded on will work. **
-            </p>
-        </div>
-    </div>
-    <div class="w3-container w3-cell" style="width:25%"></div>
-</div>
-
-<div class="w3-cell-row w3-mobile">
-    <div class="w3-container w3-cell" style="width:25%"></div>
-    <div class="w3-container w3-cell w3-cell-bottom w3-mobile">
-        {% if message %}
-            <div class="w3-card w3-border">
-                <header class="w3-container w3-light-grey w3-border-bottom">
-                    <h3>Decoded message</h3>
-                </header>
-    
-                <div class="w3-container">
-                    <p class="w3-margin">'{{ message }}'</p>
-                </div>
-            </div>
-            <br><br><br>
-            <a class="w3-button w3-blue" href="{{ url_for('decode') }}">Decode Another Image</a>
-        {% else %}
-            <form action="/projects/steganography/decode/compute/" method="POST" enctype="multipart/form-data">
-                <br>
-                <label for="img">Select image to decode:</label>
-                <input type="file" id="img" name="img" accept="image/png" required><br><br>
-                <input class="w3-button w3-blue" type="submit">
-            </form>
-        {% endif %}
-    </div>
-    <div class="w3-container w3-cell" style="width:25%"></div>
-</div>
-<br><br><br><br>
     
 {% endblock content %}

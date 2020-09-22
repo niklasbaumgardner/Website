@@ -34,7 +34,7 @@
             <a class="w3-button w3-light-blue" href="{{ url_for('decode') }}">Decode this or another image</a>
 
         {% else %}
-            <form class="w3-container" action="/projects/steganography/encode/compute/" method="POST" enctype="multipart/form-data">
+            <form class="w3-container" action="{{ url_for('encode_compute') }}" method="POST" enctype="multipart/form-data">
                 <br>
                 <label for="img">Select image to encode:</label>
                 <input type="file" id="img" name="img" accept="image/png, image/jpeg" required><br><br>

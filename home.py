@@ -1,5 +1,5 @@
 from flask import Flask, escape, request, render_template, url_for, redirect, session
-# from bs4 import BeautifulSoup as bs
+from flask_mail import Mail, Message
 from numpy import random as rand
 import mandelbrot as mandel
 import steganography as steg
@@ -10,6 +10,7 @@ import uuid
 
 
 app = Flask(__name__)
+mail = Mail(app)
 app.secret_key = os.urandom(24)
 
 scheduler = BackgroundScheduler()
@@ -148,6 +149,21 @@ def projects():
 @app.route("/contact/", methods=["GET"])
 def contact():
     return render_template("contact.html")
+
+@app.route("/send/", methods=["POST"])
+def send():
+    name = request.form['name']
+    email = request.form['email']
+    subject = request.form['subject']
+    message = request.form['message']
+
+    emailMessage = Message(subject, sender=email, recipients=["baumga91@msu.edu"])
+
+    emailMessage.body = message
+
+    mail.send(emailMessage)
+
+    return True
 
 
 
