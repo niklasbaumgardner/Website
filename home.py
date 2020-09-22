@@ -157,9 +157,7 @@ def send():
     subject = request.form['subject']
     message = request.form['message']
 
-    emailMessage = Message(subject, sender=email, recipients=["baumga91@msu.edu"])
-
-    emailMessage.body = message
+    emailMessage = Message(subject=subject, sender=email, recipients=["baumga91@msu.edu"], body=message)
 
     mail.send(emailMessage)
 
@@ -181,6 +179,6 @@ def send():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # app.run(debug=True)
     app.run()
 
