@@ -1,5 +1,5 @@
 from flask import Flask, escape, request, render_template, url_for, redirect, session
-from flask_mail import Mail, Message
+# from flask_mail import Mail, Message
 from numpy import random as rand
 import mandelbrot as mandel
 import steganography as steg
@@ -10,7 +10,7 @@ import uuid
 
 
 app = Flask(__name__)
-mail = Mail(app)
+# mail = Mail(app)
 app.secret_key = os.urandom(24)
 
 scheduler = BackgroundScheduler()
@@ -152,14 +152,14 @@ def contact():
 
 @app.route("/send/", methods=["POST"])
 def send():
-    name = request.form['name']
-    email = request.form['email']
-    subject = request.form['subject']
-    message = request.form['message']
+    # name = request.form['name']
+    # email = request.form['email']
+    # subject = request.form['subject']
+    # message = request.form['message']
 
-    emailMessage = Message(subject=subject, sender=email, recipients=["baumga91@msu.edu"], body=message)
+    # emailMessage = Message(subject=subject, sender=email, recipients=["baumga91@msu.edu"], body=message)
 
-    mail.send(emailMessage)
+    # mail.send(emailMessage)
 
     return True
 
