@@ -1,5 +1,5 @@
-from flask import Flask, escape, request, render_template, url_for, redirect, session
-# from flask_mail import Mail, Message
+from flask import Flask, escape, request, render_template, url_for, redirect, session, flash
+from flask_mail import Mail, Message
 from numpy import random as rand
 import mandelbrot as mandel
 import steganography as steg
@@ -10,11 +10,18 @@ import uuid
 
 
 app = Flask(__name__)
-# mail = Mail(app)
+
 app.secret_key = os.urandom(24)
 
 scheduler = BackgroundScheduler()
 scheduler.start()
+
+app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = os.environ.get('EMAIL_USER')
+app.config['MAIL_PASSWORD'] = os.environ.get('EMAIL_PASS')
+mail = Mail(app)
 
 
 @app.route('/', methods=["GET"])
@@ -152,16 +159,23 @@ def contact():
 
 @app.route("/send/", methods=["POST"])
 def send():
-    # name = request.form['name']
-    # email = request.form['email']
-    # subject = request.form['subject']
-    # message = request.form['message']
 
-    # emailMessage = Message(subject=subject, sender=email, recipients=["baumga91@msu.edu"], body=message)
+    try:
+        name = request.form['name']
+        email = request.form['email']
+        subject = request.form['subject']
+        message = request.form['message']
+        
+        emailMessage = Message(subject=subject, sender='noreply', recipients=[email, "baumga91@msu.edu"], body=message)
 
-    # mail.send(emailMessage)
+        mail.send(emailMessage)
 
-    return True
+        flash('Email successfully sent!', 'w3-pale-green')
+    except:
+        flash('Email failed to send', 'w3-pale-red')
+
+    return redirect(url_for('contact'))
+
 
 
 
@@ -179,6 +193,6 @@ def send():
 
 
 if __name__ == '__main__':
-    # app.run(debug=True)
-    app.run()
+    app.run(debug=True)
+    # app.run()
 
