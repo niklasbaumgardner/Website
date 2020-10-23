@@ -49,6 +49,8 @@ html, body {
 .parallax {
     /* The image used */
     background-image: url('../images/sky.jpg');
+    opacity: 0.8;
+    filter: brightness(40%);
 
     /* Full height */
     height: 100%; 
@@ -58,4 +60,8 @@ html, body {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.left {
+    text-align: left;
 }

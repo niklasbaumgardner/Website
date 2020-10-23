@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +17,11 @@
     <header>
 
         <div class="w3-top">
+            <div class="w3-bar w3-red">
+                <a href="/" class="w3-bar-item w3-mobile" style="text-decoration: none;width: 46%"></a>
+                <p class="w3-bar-item w3-mobile">Work in progress!</p>
+                <a href="/" class="w3-bar-item w3-mobile" style="text-decoration: none;width: 46%"></a>
+            </div>
             <div class="w3-bar w3-border w3-light-grey w3-large">
                 <a href="/" class="w3-bar-item" style="text-decoration: none;">Niklas Baumgardner</a>
                 <a class="w3-bar-item w3-button w3-mobile w3-hover-blue w3-right w3-hide-small" href="../static/documents/Niklas Baumgardner Resume.pdf" target="_blank">Resume</a>
@@ -49,10 +55,11 @@
     </header>
 
     <!-- <div class="parallax"></div> -->
-
+    <!-- <div class="parallax"> -->
     <div class="wrapper">
         {% block content %}{% endblock content %}
     </div>
+    <!-- </div> -->
 
     <div class="push"><div class="parallax"></div></div>
 
