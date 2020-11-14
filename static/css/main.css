@@ -45,21 +45,28 @@ html, body {
     max-height: 30px;
     height: 30px;
 }
+.home-background {
+    background-image: url('../images/davide-colonna-juRODTUKcCE-unsplash-copy.jpg');
+    background-position: left;
+    background-size: 100%;
+}
 
-.parallax {
-    /* The image used */
-    background-image: url('../images/sky.jpg');
-    opacity: 0.8;
-    filter: brightness(40%);
+/* .content {
+    position: relative;
+}
 
-    /* Full height */
-    height: 100%; 
+.home-background::before {
+    content: '';
+    display: block;
+    position: absolute;
+    background-color: #000;
+    opacity: 0.5;
+    width: 100%;
+    height: auto;
+} */
 
-    /* Create the parallax scrolling effect */
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+.white-text {
+    color: white;
 }
 
 .left {

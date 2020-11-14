@@ -5,28 +5,32 @@
 {% block home %}w3-text-blue{% endblock home %}
 
 {% block content %}
-
-<div class="w3-cell-row w3-padding-32">
-    <div class="w3-container">
-        <br><br>
-        <p><img class="w3-circle w3-margin" width="250px" height="250px" src="/static/images/niklasb.png" alt="My face"></p>
+<div class="home-background">
+    <div class="w3-cell-row w3-padding-32 content">
+        <div class="w3-container">
+            <br><br>
+            <p><img class="w3-circle w3-margin" width="200px" height="200px" src="/static/images/niklasb.png" alt="My face"></p>
+        </div>
     </div>
-
-    <div class="w3-container">
-        <h2>Hello, my name is Niklas Baumgardner</h2>
-        <p>
-            I am studying Computer Science Engineering with a minor in Mathematics at Michigan State University and I will graduate in December 2020.
+    <div class="w3-cell-row w3-padding-32 content">
+        <div class="w3-container w3-cell" style="width:15%"></div>
+        <div class="w3-container">
+            <h2 class="white-text left">I am Niklas Baumgardner</h2>
+            <p class="white-text left">
+                I am studying Computer Science Engineering with a minor in Mathematics at Michigan State University and I will graduate in December 2020.
+                <br>
+                I am currently an intern for the PBM IT department at Humana. I am also an undergraduate learning assistant for Object Oriented Programming (CSE 335) at MSU.
+            </p>
             <br>
-            I am currently an intern for the PBM IT department at Humana. I am also an undergraduate learning assistant for Object Oriented Programming (CSE 335) at MSU.
-        </p>
-        <br>
+        </div>
+        <div class="w3-container w3-cell" style="width:15%"></div>
     </div>
-    
+
 </div>
 
-<div class="parallax"><br><br><br></div>
 
-<div class="w3-cell-row w3-padding-32">
+
+<div class="w3-cell-row w3-padding-32 w3-light-grey">
     <div class="w3-container">
         <h3>Technial Skills</h3>
     </div>
@@ -34,32 +38,48 @@
     <div class="w3-container">
         <!-- <p>I love to learn and apply that knowledge in my projects.</p>
         <p>I enjoy web development, object oriented programing, computer vision, and data analytics.</p> -->
-        <p>Web development, object oriented programming, computer vision, data analytics</p>
+        <!-- <p>Web development, object oriented programming, computer vision, data analytics</p> -->
         <p>
-            <img class="w3-circle w3-margin" width="40px" height="40px" src="/static/images/pythonlogo.png" alt="Python logo">
+            <!-- <img class="w3-circle w3-margin" width="40px" height="40px" src="/static/images/pythonlogo.png" alt="Python logo">
             <img class="w3-circle w3-margin" width="40px" height="40px" src="/static/images/c++logo.png" alt="C++ logo">
             <img class="w3-circle w3-margin" width="40px" height="40px" src="/static/images/cslogo.png" alt="C# logo">
             <img class="w3-circle w3-margin" width="40px" height="40px" src="/static/images/htmlcssjslogo4.png" alt="HTML/CSS/JS logo">
-            <img class="w3-circle w3-margin" width="40px" height="40px" src="/static/images/phplogo.png" alt="PHP logo">
-            <img class="w3-circle w3-margin" width="40px" height="40px" src="/static/images/matlablogo2.jpg" alt="Matlab logo">
+            <img class="w3-circle w3-margin" width="40px" height="40px" src="/static/images/phplogo.png" alt="PHP logo"> -->
+            <div class="w3-cell-row">
+                <p class="w3-cell" style="width: 30%;"></p>
+                <p class="w3-cell"><img class="w3-circle w3-margin" width="40px" height="40px" src="/static/images/pythonlogo.png" alt="Python logo"></p>
+                <p class="w3-cell"><img class="w3-circle w3-margin" width="40px" height="40px" src="/static/images/c++logo.png" alt="C++ logo"></p>
+                <p class="w3-cell"><img class="w3-circle w3-margin" width="40px" height="40px" src="/static/images/cslogo.png" alt="C# logo"></p>
+                <p class="w3-cell"><img class="w3-circle w3-margin" width="40px" height="40px" src="/static/images/htmlcssjslogo4.png" alt="HTML/CSS/JS logo"></p>
+                <p class="w3-cell"><img class="w3-circle w3-margin" width="40px" height="40px" src="/static/images/phplogo.png" alt="PHP logo"></p>
+                <p class="w3-cell" style="width: 30%;"></p>
+            </div>
+            <!-- <img class="w3-circle w3-margin" width="40px" height="40px" src="/static/images/matlablogo2.jpg" alt="Matlab logo"> -->
         </p>
         <br>
     </div>
     
 </div>
 
-<div class="parallax"><br><br><br></div>
 
 <div class="w3-cell-row w3-padding-32">
     <div class="w3-container">
-        <h3>Hobbies</h3>
-</div>
+        <h3>Interests</h3>
+    </div>
 
     <div class="w3-container">
         <!-- because it allows me to non verbally express myself. -->
         <!-- <p>I love mens fashion</p>
         <p>I love staying active by playing hockey, golfing and riding mountain bikes.</p> -->
-        <p>Included information about hobbies. E.g. hockey, golf, mountain biking, fashion. </p>
+        <div class="w3-cell-row">
+            <p class="w3-cell" style="width: 30%;"></p>
+            <p class="w3-cell"><img class="w3-circle w3-margin" width="50px" height="50px" src="/static/images/hawaii.jpg" alt="Picture of Hawaii"><br>Traveling</p>
+            <p class="w3-cell"><img class="w3-circle w3-margin" width="50px" height="50px" src="/static/images/hockey.jpg" alt="Picture of me"><br>Hockey</p>
+            <p class="w3-cell"><img class="w3-circle w3-margin" width="50px" height="50px" src="/static/images/courtney-cook-jxEXrF3L97s-unsplash (1).jpg" alt="https://unsplash.com/photos/jxEXrF3L97s"><br>Golf</p>
+            <p class="w3-cell"><img class="w3-circle w3-margin" style="filter: brightness(1.4);" width="50px" height="50px" src="/static/images/mike-kenneally-TD4DBagg2wE-unsplash.jpg" alt="https://unsplash.com/photos/TD4DBagg2wE"><br>Coffee</p>
+            <p class="w3-cell"><img class="w3-circle w3-margin" width="50px" height="50px" src="/static/images/fashion.jpg" alt="Picture of me"><br>Fashion</p>
+            <p class="w3-cell" style="width: 30%;"></p>
+        </div>
         <br><br>
     </div>
     
