@@ -1,4 +1,91 @@
+from flask import Blueprint, render_template, session, request, url_for, redirect
+import uuid
+from apscheduler.schedulers.background import BackgroundScheduler
+import datetime
+from numpy import random as rand
+# import python_files.steganography as steg
 from PIL import Image
+import os
+
+
+steganography_web = Blueprint('steganography_web', __name__)
+
+
+@steganography_web.route("/projects/steganography/", methods=["GET"])
+def steganography():
+    return render_template("steganography.html")
+
+
+@steganography_web.route("/projects/steganography/encode/", methods=["GET"])
+def encode():
+    try:
+        session['uid']
+    except:
+        session['uid'] = uuid.uuid4()
+
+    img = ''
+    show = False
+    if 'show' in request.values and request.values['show'] == 'True':
+        show = True
+        img = '/' + session['steganography_image'] + '?' + str(rand.randint(1000))
+    
+    return render_template("encode.html", image=img, show=show)
+
+
+@steganography_web.route("/projects/steganography/encode/compute/", methods=["POST"])
+def encode_compute():
+    scheduler = BackgroundScheduler()
+    scheduler.start()
+    message = request.form['message']
+    image = request.files['img']
+    if not message or not image:
+        return redirect(url_for('steganography_web.encode'))
+    
+    filename = 'static/images/' + str(session['uid']) + image.filename.split('.')[0] + '.png'
+    image.save(filename)
+    session['steganography_image'] = filename
+    
+    binary_string = encode_string(message)
+    image = encode_image(filename, binary_string)
+
+    time = datetime.datetime.now() + datetime.timedelta(minutes = 4)
+    if scheduler.get_job(filename):
+        scheduler.reschedule_job(job_id=filename, trigger='date', run_date=time)
+        print(f'job rescheduled for {time}')
+    else:
+        scheduler.add_job(delete_file, args=[filename], trigger='date', run_date=time, id=filename)
+        print(f'job scheduled for {time}')
+    
+    return redirect(url_for('steganography_web.encode', show='True'))
+
+
+@steganography_web.route("/projects/steganography/decode/", methods=["GET"])
+def decode():
+    hidden = 'hidden'
+    message = ''
+    
+    if 'message' in request.values:
+        message = request.values['message']
+        hidden = ''
+        
+    return render_template("decode.html", hidden=hidden, message=message)
+
+
+@steganography_web.route("/projects/steganography/decode/compute/", methods=["POST"])
+def decode_compute():
+    image = request.files['img']
+    if not image:
+        return redirect(url_for('steganography_web.decode'))
+    
+    binary_string = decode_image(image)
+    message = decode_string(binary_string)
+
+    return redirect(url_for('steganography_web.decode', message=message))
+
+
+def delete_file(filename):
+    os.remove(filename)
+    print(f'{filename} deleted')
 
 
 def open_image(image_name):

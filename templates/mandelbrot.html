@@ -45,7 +45,7 @@
     <div class="w3-cell-row w3-margin-bottom w3-margin-top">
         <div class="w3-container w3-cell w3-margin-bottom" style="width:48%">
             <div class="w3-margin-bottom w3-margin-top">
-                <form id="m_form" action="{{ url_for('calculate') }}" method="post">
+                <form id="m_form" action="{{ url_for('mandelbrot_web.calculate') }}" method="POST">
                     <input hidden type="text" id="r" name="r" value="{{ real }}">
                     <input hidden type="text" id="i" name="i" value="{{ imag }}">
                     <input class="w3-button w3-blue w3-right w3-margin-right" type="submit" id="go" name="go" value="Go">
@@ -55,7 +55,7 @@
         <div class="w3-container w3-cell" style="width:4%"></div>
         <div class="w3-container w3-cell w3-margin-bottom" style="width:48%">
             <div class="w3-margin-bottom w3-margin-top">
-                <form action="/projects/mandelbrot/calculate/" method="POST">
+                <form action="{{ url_for('mandelbrot_web.calculate') }}" method="POST">
                     <input class="w3-button w3-blue w3-left w3-margin-left" type="submit" id="rand" name="rand" value="Random">
                 </form>
             </div>

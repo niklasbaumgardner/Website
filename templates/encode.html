@@ -8,8 +8,8 @@
 
     <div class="w3-container w3-cell" style="width:25%"></div>
     <div class="w3-container w3-cell w3-cell-bottom w3-mobile w3-margin-top">
-        <!-- <h2><a href="{{ url_for('steganography') }}">About Page</a></h2> -->
-        <!-- <h3 class="w3-text-blue"><a href="{{ url_for('decode') }}">Click here to decode an image</a></h3> -->
+        <!-- <h2><a href="{{ url_for('steganography_web.steganography') }}">About Page</a></h2> -->
+        <!-- <h3 class="w3-text-blue"><a href="{{ url_for('steganography_web.decode') }}">Click here to decode an image</a></h3> -->
         <div class="w3-panel w3-border w3-light-grey">
             <p class="w3-padding w3-padding-16">
                 Select an image you would like to use and then type the message you want to encode.
@@ -30,11 +30,11 @@
             </a></p>
             <p>Click the image to download</p>
             <br><br><br>
-            <a class="w3-button w3-light-grey" href="{{ url_for('encode') }}">Encode another image</a>
-            <a class="w3-button w3-light-blue" href="{{ url_for('decode') }}">Decode this or another image</a>
+            <a class="w3-button w3-light-grey" href="{{ url_for('steganography_web.encode') }}">Encode another image</a>
+            <a class="w3-button w3-light-blue" href="{{ url_for('steganography_web.decode') }}">Decode this or another image</a>
 
         {% else %}
-            <form class="w3-container" action="{{ url_for('encode_compute') }}" method="POST" enctype="multipart/form-data">
+            <form class="w3-container" action="{{ url_for('steganography_web.encode_compute') }}" method="POST" enctype="multipart/form-data">
                 <br>
                 <label for="img">Select image to encode:</label>
                 <input type="file" id="img" name="img" accept="image/png, image/jpeg" required><br><br>
