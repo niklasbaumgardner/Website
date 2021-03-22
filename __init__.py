@@ -8,7 +8,7 @@ import os
 # import datetime
 # import uuid
 
-db = SQLAlchemy()
+# db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
@@ -30,7 +30,7 @@ def create_app():
     db.init_app(app)
 
     # blueprint for auth routes in our app
-    from .auth import auth as auth_blueprint
+    from Website.user.auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
 
     # blueprint for non-auth parts of app
@@ -42,10 +42,10 @@ def create_app():
 
     # steganography
 
-    from .mandelbrot_web import mandelbrot_web as mandelbrot_blueprint
+    from Website.main.mandelbrot_web import mandelbrot_web as mandelbrot_blueprint
     app.register_blueprint(mandelbrot_blueprint)
 
-    from .steganography_web import steganography_web as steganography_blueprint
+    from Website.main.steganography_web import steganography_web as steganography_blueprint
     app.register_blueprint(steganography_blueprint)
 
     return app
