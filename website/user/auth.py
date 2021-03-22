@@ -18,7 +18,7 @@ def login_post():
 
     if user and bcrypt.check_password_hash(user.password, password):
         # add remember me button
-        login_user(user, remember=True)
+        login_user(user)
         next_page = request.args.get('next')
         return redirect(next_page or url_for('bracket.standings'))
 
