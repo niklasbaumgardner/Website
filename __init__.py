@@ -27,17 +27,17 @@ def create_app():
 
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 
-    db.init_app(app)
+    # db.init_app(app)
 
     # blueprint for auth routes in our app
     from Website.user.auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
 
     # blueprint for non-auth parts of app
-    from .bracket import bracket as bracket_blueprint
+    from Website.bracket.bracket import bracket as bracket_blueprint
     app.register_blueprint(bracket_blueprint)
 
-    from .home import home as home_blueprint
+    from Website.main.home import home as home_blueprint
     app.register_blueprint(home_blueprint)
 
     # steganography
