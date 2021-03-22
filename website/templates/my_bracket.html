@@ -15,4 +15,310 @@
         
     </div>
 
-{% endblock content %}s
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <link rel="stylesheet" href="/static/css/bracket.css">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Holtwood+One+SC' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Kaushan+Script|Herr+Von+Muellerhoff' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Istok+Web|Roboto+Condensed:700' rel='stylesheet' type='text/css'>
+    
+        <title>March Madness Stock Matchup</title>
+        <er class="hero">
+            <div class="hero-wrap">
+                <p class="intro" id="intro">NCAA</p>
+                    <h1 id="line">Hockey Bracket</h1>
+                    <p class="year"><i class="fa fa-star"></i> 2021 <i class="fa fa-star"></i></p>
+                <!-- <p>Ballin' Outta Control</p> -->
+            </div>
+            <script>
+                function game9_team1(team_name) {
+                    var g9t1 = document.getElementById("g9t1");
+                    var temp = '<input onclick="game13_team1(\'' + team_name + '\')" type="radio" name="game9" value="' + team_name +  '" required> ' + team_name;
+                    if (g9t1.innerHTML.includes(team_name))
+                    {
+                        return;
+                    }
+                    g9t1.innerHTML = temp;
+                    var g13t1 = document.getElementById("g13t1");
+                    g13t1.innerHTML = '';
+                    var g15t1 = document.getElementById("g15t1");
+                    g15t1.innerHTML = '';
+                }
+                function game9_team2(team_name) {
+                    var g9t2 = document.getElementById("g9t2");
+                    var temp = '<input onclick="game13_team1(\'' + team_name + '\')" type="radio" name="game9" value="' + team_name +  '" required> ' + team_name;
+                    if (g9t2.innerHTML.includes(team_name))
+                    {
+                        return;
+                    }
+                    g9t2.innerHTML = temp;
+                    var g13t1 = document.getElementById("g13t1");
+                    g13t1.innerHTML = '';
+                    var g15t1 = document.getElementById("g15t1");
+                    g15t1.innerHTML = '';
+                }
+
+                function game10_team1(team_name) {
+                    var g10t1 = document.getElementById("g10t1");
+                    var temp = '<input onclick="game13_team2(\'' + team_name + '\')" type="radio" name="game10" value="' + team_name +  '" required> ' + team_name;
+                    if (g10t1.innerHTML.includes(team_name))
+                    {
+                        return;
+                    }
+                    g10t1.innerHTML = temp;
+                    var g13t2 = document.getElementById("g13t2");
+                    g13t2.innerHTML = '';
+                    var g15t1 = document.getElementById("g15t1");
+                    g15t1.innerHTML = '';
+                }
+                function game10_team2(team_name) {
+                    var g10t2 = document.getElementById("g10t2");
+                    var temp = '<input onclick="game13_team2(\'' + team_name + '\')" type="radio" name="game10" value="' + team_name +  '" required> ' + team_name;
+                    if (g10t2.innerHTML.includes(team_name))
+                    {
+                        return;
+                    }
+                    g10t2.innerHTML = temp;
+                    var g13t2 = document.getElementById("g13t2");
+                    g13t2.innerHTML = '';
+                    var g15t1 = document.getElementById("g15t1");
+                    g15t1.innerHTML = '';
+                }
+
+                function game13_team1(team_name) {
+                    var g13t1 = document.getElementById("g13t1");
+                    var temp = '<input onclick="game15_team1(\'' + team_name + '\')" type="radio" name="game13" value="' + team_name +  '" required> ' + team_name;
+                    if (g13t1.innerHTML.includes(team_name))
+                    {
+                        return;
+                    }
+                    g13t1.innerHTML = temp;
+                    var g15t1 = document.getElementById("g15t1");
+                    g15t1.innerHTML = '';
+                }
+                function game13_team2(team_name) {
+                    var g13t2 = document.getElementById("g13t2");
+                    var temp = '<input onclick="game15_team1(\'' + team_name + '\')" type="radio" name="game13" value="' + team_name +  '" required> ' + team_name;
+                    if (g13t2.innerHTML.includes(team_name))
+                    {
+                        return;
+                    }
+                    g13t2.innerHTML = temp;
+                    var g15t1 = document.getElementById("g15t1");
+                    g15t1.innerHTML = '';
+                }
+
+                function game15_team1(team_name) {
+                    var g15t1 = document.getElementById("g15t1");
+                    g15t1.innerHTML = '<input type="radio" name="game15" value="' + team_name +  '" required> ' + team_name;
+                }
+                function game15_team2(team_name) {
+                    var g15t2 = document.getElementById("g15t2");
+                    g15t2.innerHTML = '<input type="radio" name="game15" value="' + team_name +  '" required> ' + team_name;
+                }
+
+                function game14_team1(team_name) {
+                    var g14t1 = document.getElementById("g14t1");
+                    var temp = '<input onclick="game15_team2(\'' + team_name + '\')" type="radio" name="game14" value="' + team_name +  '" required> ' + team_name;
+                    if (g14t1.innerHTML.includes(team_name))
+                    {
+                        return;
+                    }
+                    g14t1.innerHTML = temp;
+                    var g15t2 = document.getElementById("g15t2");
+                    g15t2.innerHTML = '';
+                }
+                function game14_team2(team_name) {
+                    var g14t2 = document.getElementById("g14t2");
+                    var temp = '<input onclick="game15_team2(\'' + team_name + '\')" type="radio" name="game14" value="' + team_name +  '" required> ' + team_name;
+                    if (g14t2.innerHTML.includes(team_name))
+                    {
+                        return;
+                    }
+                    g14t2.innerHTML = temp;
+                    var g15t2 = document.getElementById("g15t2");
+                    g15t2.innerHTML = '';
+                }
+
+                function game12_team1(team_name) {
+                    var g12t1 = document.getElementById("g12t1");
+                    var temp = '<input onclick="game14_team2(\'' + team_name + '\')" type="radio" name="game12" value="' + team_name +  '" required> ' + team_name;
+                    if (g12t1.innerHTML.includes(team_name))
+                    {
+                        return;
+                    }
+                    g12t1.innerHTML = temp;
+                    var g14t2 = document.getElementById("g14t2");
+                    g14t2.innerHTML = '';
+                    var g15t2 = document.getElementById("g15t2");
+                    g15t2.innerHTML = '';
+                }
+                function game12_team2(team_name) {
+                    var g12t2 = document.getElementById("g12t2");
+                    var temp = '<input onclick="game14_team2(\'' + team_name + '\')" type="radio" name="game12" value="' + team_name +  '" required> ' + team_name;
+                    if (g12t2.innerHTML.includes(team_name))
+                    {
+                        return;
+                    }
+                    g12t2.innerHTML = temp;
+                    var g14t2 = document.getElementById("g14t2");
+                    g14t2.innerHTML = '';
+                    var g15t2 = document.getElementById("g15t2");
+                    g15t2.innerHTML = '';
+                }
+
+                function game11_team1(team_name) {
+                    var g11t1 = document.getElementById("g11t1");
+                    var temp = '<input onclick="game14_team1(\'' + team_name + '\')" type="radio" name="game11" value="' + team_name +  '" required> ' + team_name;
+                    if (g11t1.innerHTML.includes(team_name))
+                    {
+                        return;
+                    }
+                    g11t1.innerHTML = temp;
+                    var g14t1 = document.getElementById("g14t1");
+                    g14t1.innerHTML = '';
+                    var g15t2 = document.getElementById("g15t2");
+                    g15t2.innerHTML = '';
+                }
+                function game11_team2(team_name) {
+                    var g11t2 = document.getElementById("g11t2");
+                    var temp = '<input onclick="game14_team1(\'' + team_name + '\')" type="radio" name="game11" value="' + team_name +  '" required> ' + team_name;
+                    if (g11t2.innerHTML.includes(team_name))
+                    {
+                        return;
+                    }
+                    g11t2.innerHTML = temp;
+                    var g14t1 = document.getElementById("g14t1");
+                    g14t1.innerHTML = '';
+                    var g15t2 = document.getElementById("g15t2");
+                    g15t2.innerHTML = '';
+                }
+            </script>
+        </er>
+    
+    
+        <section id="bracket">
+            <form action="{{ url_for('bracket.submit_bracket') }}" method="POST">
+                <input class="w3-button w3-blue w3-ripple w3-padding" type="submit" value="Submit bracket">
+                <div class="container">
+                    <div class="split split-one">
+                        <div class="round round-one current">
+                            <div class="round-details">Round 1<br/><span class="date">March 16</span></div>
+                            <ul class="matchup">
+                                <li class="team team-top"><input onclick="game9_team1('North Dakota')" type="radio" id="North Dakota" name="game1" value="North Dakota" required> 1 North Dakota<span class="score"></span></li>
+                                <li class="team team-top"><input onclick="game9_team1('AIC')" type="radio" id="AIC" name="game1" value="AIC"> AIC<span class="score"></span></li>
+                            </ul>
+                            <br>
+                            <ul class="matchup">
+                                <li class="team team-top"><input onclick="game9_team2('Minnesota Duluth')" type="radio" id="Minnesota Duluth" name="game2" value="Minnesota Duluth" required> Minnesota Duluth<span class="score"></span></li>
+                                <li class="team team-top"><input onclick="game9_team2('Michigan')" type="radio" id="Michigan" name="game2" value="Michigan"> Michigan<span class="score"></span></li>
+                            </ul>
+                            <br><br><br><br>
+                            <ul class="matchup">
+                                <li class="team team-top"><input onclick="game10_team1('Wisconsin')" type="radio" id="Wisconsin" name="game3" value="Wisconsin" required> Wisconsin<span class="score"></span></li>
+                                <li class="team team-top"><input onclick="game10_team1('Bemidji State')" type="radio" id="Bemidji State" name="game3" value="Bemidji State"> Bemidji State<span class="score"></span></li>
+                            </ul>
+                            <br>
+                            <ul class="matchup">
+                                <li class="team team-top"><input onclick="game10_team2('Lake Superior State')" type="radio" id="Lake Superior State" name="game4" value="Lake Superior State" required> Lake Superior State<span class="score"></span></li>
+                                <li class="team team-top"><input onclick="game10_team2('Massachusetts')" type="radio" id="Massachusetts" name="game4" value="Massachusetts"> Massachusetts<span class="score"></span></li>
+                            </ul>
+                        </div>	<!-- END ROUND ONE -->
+                
+                        <div class="round round-two">
+                            <div class="round-details">Round 2<br/><span class="date">March 18</span></div>			
+                            <ul class="matchup">
+                                <li id="g9t1" class="team team-top"><span class="score"></span></li>
+                                <li id="g9t2" class="team team-top"><span class="score"></span></li>
+                            </ul>
+                            <br><br><br><br><br><br>
+                            <ul class="matchup">
+                                <li id="g10t1" class="team team-top"><span class="score"></span></li>
+                                <li id="g10t2" class="team team-bottom"><span class="score"></span></li>
+                            </ul>
+                        </div>	<!-- END ROUND TWO -->
+                        
+                        <div class="round round-three">
+                            <div class="round-details">Round 3<br/><span class="date">March 22</span></div>
+                            <br><br>	
+                            <ul class="matchup">
+                                <li id="g13t1" class="team team-top"><span class="score"></span></li>
+                                <li id="g13t2" class="team team-bottom"><span class="score"></span></li>
+                            </ul>
+                        </div>	<!-- END ROUND THREE -->		
+                    </div> 
+                
+                <div class="champion">
+                        <div class="final">
+                            <i class="fa fa-trophy"></i>
+                            <div class="round-details">championship <br/><span class="date">March 30 - Apr. 1</span></div>		
+                            <ul class ="matchup championship">
+                                <li id="g15t1" class="team team-top"><span class="vote-count"></span></li>
+                                <li id="g15t2" class="team team-bottom"><span class="vote-count"></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                
+                
+                    <div class="split split-two">
+                
+                
+                        <div class="round round-three">
+                            <div class="round-details">Round 3<br/><span class="date">March 22</span></div>
+                            <br><br>					
+                            <ul class="matchup">
+                                <li id="g14t1" class="team team-top"><span class="score"></span></li>
+                                <li id="g14t2" class="team team-bottom"><span class="score"></span></li>
+                            </ul>
+                        </div>	<!-- END ROUND THREE -->	
+                
+                        <div class="round round-two">
+                            <div class="round-details">Round 2<br/><span class="date">March 18</span></div>						
+                            <ul class="matchup">
+                                <li id="g11t1" class="team team-top"><span class="score"></span></li>
+                                <li id="g11t2" class="team team-bottom"><span class="score"></span></li>
+                            </ul>
+                            <br><br><br><br><br><br>
+                            <ul class="matchup">
+                                <li id="g12t1" class="team team-top"><span class="score"></span></li>
+                                <li id="g12t2" class="team team-bottom"><span class="score"></span></li>
+                            </ul>
+                        </div>	<!-- END ROUND TWO -->
+                        <div class="round round-one current">
+                            <div class="round-details">Round 1<br/><span class="date">March 16</span></div>
+                            <ul class="matchup">
+                                <li class="team team-top"><input onclick="game11_team1('Minnesota')" type="radio" name="game5" value="Minnesota" required> 3 Minnesota<span class="score"></span></li>
+                                <li class="team team-top"><input onclick="game11_team1('Omaha')" type="radio" name="game5" value="Omaha"> Omaha<span class="score"></span></li>
+                            </ul>
+                            <br>
+                            <ul class="matchup">
+                                <li class="team team-top"><input onclick="game11_team2('Minnesota State')" type="radio" name="game6" value="Minnesota State" required> Minnesota State<span class="score"></span></li>
+                                <li class="team team-top"><input onclick="game11_team2('Quinnipiac')" type="radio" name="game6" value="Quinnipiac"> Quinnipiac<span class="score"></span></li>
+                            </ul>
+                            <br><br><br><br>
+                            <ul class="matchup">
+                                <li class="team team-top"><input onclick="game12_team1('Boston College')" type="radio" name="game7" value="Boston College" required> 2 Boston College<span class="score"></span></li>
+                                <li class="team team-top"><input onclick="game12_team1('Notre Dame')" type="radio" name="game7" value="Notre Dame"> Notre Dame<span class="score"></span></li>
+                            </ul>
+                            <br>
+                            <ul class="matchup">
+                                <li class="team team-top"><input onclick="game12_team2('St. Cloud State')" type="radio" name="game8" value="St. Cloud State" required> St. Cloud State<span class="score"></span></li>
+                                <li class="team team-top"><input onclick="game12_team2('Boston University')" type="radio" name="game8" value="Boston University"> Boston University<span class="score"></span></li>
+                            </ul>
+                        </div>	<!-- END ROUND ONE -->          				
+                    </div>
+                </div>
+            </form>
+        </section>
+        <section class="share">
+                <div class="share-wrap">
+                    <a class="share-icon" href="https://twitter.com/_joebeason"><i class="fa fa-twitter"></i></a>
+                    <a class="share-icon" href="#"><i class="fa fa-facebook"></i></a>
+                    <a class="share-icon" href="#"><i class="fa fa-envelope"></i></a>
+                </div>
+        </section>
+
+{% endblock content %}

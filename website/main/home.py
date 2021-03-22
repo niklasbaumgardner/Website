@@ -26,28 +26,28 @@ def index():
 def projects():
     return render_template("projects.html")
 
-@home.route("/contact/", methods=["GET"])
-def contact():
-    return render_template("contact.html")
+# @home.route("/contact/", methods=["GET"])
+# def contact():
+#     return render_template("contact.html")
 
-@home.route("/send/", methods=["POST"])
-def send():
+# @home.route("/send/", methods=["POST"])
+# def send():
 
-    # try:
-    name = request.form['name']
-    email = request.form['email']
-    subject = request.form['subject']
-    message = request.form['message']
-    
-    emailMessage = Message(subject=subject, sender='noreply', recipients=[email, "baumga91@msu.edu"], body=message)
+#     try:
+#         name = request.form['name']
+#         email = request.form['email']
+#         subject = request.form['subject']
+#         message = request.form['message']
+        
+#         emailMessage = Message(subject=subject, sender='noreply', recipients=[email, "baumga91@msu.edu"], body=message)
 
-    mail.send(emailMessage)
+#         mail.send(emailMessage)
 
-    flash('Email successfully sent!', 'w3-pale-green')
-    # except:
-    #     flash('Email failed to send', 'w3-pale-red')
+#         flash('Email successfully sent!', 'w3-pale-green')
+#     # except:
+#     #     flash('Email failed to send', 'w3-pale-red')
 
-    return redirect(url_for('home.contact'))
+#     return redirect(url_for('home.contact'))
 
 
 
