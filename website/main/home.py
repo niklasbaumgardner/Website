@@ -1,6 +1,7 @@
 # from flask import Flask, escape, request, render_template, url_for, redirect, session, flash
 from flask import Blueprint, render_template, flash, redirect, url_for, request
 from flask_mail import Mail, Message
+from website import mail
 # from numpy import random as rand
 # import mandelbrot as mandel
 # import steganography as steg
@@ -58,7 +59,7 @@ def send():
     except:
         flash('Email failed to send', 'w3-pale-red')
 
-    return redirect(url_for('contact'))
+    return redirect(url_for('home.contact'))
 
 
 
