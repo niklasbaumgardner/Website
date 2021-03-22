@@ -30,7 +30,7 @@
                     <a class="w3-bar-item w3-button w3-hover-blue w3-right" href="{{ url_for('auth.login') }}">Login</a>
                 {% endif %}
                 <a class="w3-bar-item w3-button w3-hover-blue w3-right" href="{{ url_for('bracket.standings') }}">standings</a>
-                <a class="w3-bar-item w3-button w3-hover-blue w3-right" href="{{ url_for('bracket.my_bracket') }}">Bracket</a>
+                <a class="w3-bar-item w3-button w3-hover-blue w3-right" href="{{ url_for('bracket.view_bracket') }}">Bracket</a>
                 <a class="w3-bar-item w3-button w3-mobile w3-hover-blue w3-right w3-hide-small" href="../static/documents/Niklas Baumgardner Resume.pdf" target="_blank">Resume</a>
                 <a class="w3-bar-item w3-button w3-mobile w3-hover-blue w3-right w3-hide-small" href="https://github.com/niklasbaumgardner" target="_blank">Code</a>
                 <a class="w3-bar-item w3-button w3-mobile w3-hover-blue w3-right w3-hide-small {% block projects %}{% endblock projects %}" href="{{ url_for('home.projects') }}">Projects</a>

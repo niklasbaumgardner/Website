@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+
+{% block title %}My Bracket{% endblock title %}
+
+
+
+{% block content %}
+
+
+    <div class="w3-cell-row w3-padding-32">
+        <div class="w3-container">
+            <br><br>
+            <h1>My Bracket</h1>
+        </div>
+        
+    </div>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <link rel="stylesheet" href="/static/css/bracket.css">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Holtwood+One+SC' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Kaushan+Script|Herr+Von+Muellerhoff' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Istok+Web|Roboto+Condensed:700' rel='stylesheet' type='text/css'>
+    
+        <title>March Madness Stock Matchup</title>
+        <header class="hero">
+            <div class="hero-wrap">
+                <p class="intro" id="intro">NCAA</p>
+                    <h1 id="line">Hockey Bracket</h1>
+                    <p class="year"><i class="fa fa-star"></i> 2021 <i class="fa fa-star"></i></p>
+                <!-- <p>Ballin' Outta Control</p> -->
+            </div>
+        </header>
+    
+    
+        <section id="bracket">
+                <br>
+                {% if bracket %}
+                    <a class="w3-button w3-blue w3-ripple w3-padding" href="{{ url_for('bracket.edit_bracket') }}">Edit Bracket</a>
+                    <div class="round-details">{{ bracket.name }}</div>
+                    <br><br>
+                    <div class="container">
+                        <div class="split split-one">
+                            <div class="round round-one current">
+                                <div class="round-details">Round 1<br/><span class="date">March 16</span></div>
+                                <ul class="matchup">
+                                    <li class="team team-top">1 North Dakota<span class="score"></span></li>
+                                    <li class="team team-top">AIC<span class="score"></span></li>
+                                </ul>
+                                <br>
+                                <ul class="matchup">
+                                    <li class="team team-top">Minnesota Duluth<span class="score"></span></li>
+                                    <li class="team team-top">Michigan<span class="score"></span></li>
+                                </ul>
+                                <br><br><br><br>
+                                <ul class="matchup">
+                                    <li class="team team-top">Wisconsin<span class="score"></span></li>
+                                    <li class="team team-top">Bemidji State<span class="score"></span></li>
+                                </ul>
+                                <br>
+                                <ul class="matchup">
+                                    <li class="team team-top">Lake Superior State<span class="score"></span></li>
+                                    <li class="team team-top">Massachusetts<span class="score"></span></li>
+                                </ul>
+                            </div>	<!-- END ROUND ONE -->
+                    
+                            <div class="round round-two current">
+                                <div class="round-details">Round 2<br/><span class="date">March 18</span></div>			
+                                <ul class="matchup">
+                                    <li class="team team-top">{{ bracket.game1 }}<span class="score"></span></li>
+                                    <li class="team team-top">{{ bracket.game2 }}<span class="score"></span></li>
+                                </ul>
+                                <br><br><br><br><br><br>
+                                <ul class="matchup">
+                                    <li class="team team-top">{{ bracket.game3 }}<span class="score"></span></li>
+                                    <li class="team team-bottom">{{ bracket.game4 }}<span class="score"></span></li>
+                                </ul>
+                            </div>	<!-- END ROUND TWO -->
+                            
+                            <div class="round round-three current">
+                                <div class="round-details">Round 3<br/><span class="date">March 22</span></div>
+                                <br><br>	
+                                <ul class="matchup">
+                                    <li class="team team-top">{{ bracket.game9 }}<span class="score"></span></li>
+                                    <li class="team team-bottom">{{ bracket.game10 }}<span class="score"></span></li>
+                                </ul>
+                            </div>	<!-- END ROUND THREE -->		
+                        </div> 
+                    
+                    <div class="champion">
+                            <div class="semis-l current">
+                                <div class="round-details">Winner</div>		
+                                <ul class ="matchup championship">
+                                    <li class="w3-orange team team-top">{{ bracket.game15 }}</li>
+                                </ul>
+                            </div>
+                            <div class="final current">
+                                <i class="fa fa-trophy"></i>
+                                <div class="round-details">championship <br/><span class="date">March 30 - Apr. 1</span></div>
+                                
+                                <ul class ="matchup championship">
+                                    <li class="team team-top">{{ bracket.game13 }}<span class="vote-count"></span></li>
+                                    <li class="team team-bottom">{{ bracket.game14 }}<span class="vote-count"></span></li>
+                                </ul>
+                            </div>
+                            <div class="semis-r">		
+                                <div class="round-details">Final Score</div>	
+                                <!-- <ul class ="matchup championship"> -->
+                                    <label for="w_goals">Winner goals</label><br>
+                                    <div name="w_goals"><span class="date">{{ bracket.w_goals }}</span></div>
+                                    <label for="l_goals">Loser goals</label><br>
+                                    <div name="l_goals"><span class="date">{{ bracket.l_goals }}</span></div>
+                                <!-- </ul> -->
+                            </div>	
+                    </div>
+                    
+                    
+                        <div class="split split-two">
+                    
+                    
+                            <div class="round round-three current">
+                                <div class="round-details">Round 3<br/><span class="date">March 22</span></div>
+                                <br><br>					
+                                <ul class="matchup">
+                                    <li class="team team-top">{{ bracket.game11 }}<span class="score"></span></li>
+                                    <li class="team team-bottom">{{ bracket.game12 }}<span class="score"></span></li>
+                                </ul>
+                            </div>	<!-- END ROUND THREE -->	
+                    
+                            <div class="round round-two current">
+                                <div class="round-details">Round 2<br/><span class="date">March 18</span></div>						
+                                <ul class="matchup">
+                                    <li class="team team-top">{{ bracket.game5 }}<span class="score"></span></li>
+                                    <li class="team team-bottom">{{ bracket.game6 }}<span class="score"></span></li>
+                                </ul>
+                                <br><br><br><br><br><br>
+                                <ul class="matchup">
+                                    <li class="team team-top">{{ bracket.game7 }}<span class="score"></span></li>
+                                    <li class="team team-bottom">{{ bracket.game8 }}<span class="score"></span></li>
+                                </ul>
+                            </div>	<!-- END ROUND TWO -->
+                            <div class="round round-one current">
+                                <div class="round-details">Round 1<br/><span class="date">March 16</span></div>
+                                <ul class="matchup">
+                                    <li class="team team-top">3 Minnesota<span class="score"></span></li>
+                                    <li class="team team-top">Omaha<span class="score"></span></li>
+                                </ul>
+                                <br>
+                                <ul class="matchup">
+                                    <li class="team team-top">Minnesota State<span class="score"></span></li>
+                                    <li class="team team-top">Quinnipiac<span class="score"></span></li>
+                                </ul>
+                                <br><br><br><br>
+                                <ul class="matchup">
+                                    <li class="team team-top">2 Boston College<span class="score"></span></li>
+                                    <li class="team team-top">Notre Dame<span class="score"></span></li>
+                                </ul>
+                                <br>
+                                <ul class="matchup">
+                                    <li class="team team-top">St. Cloud State<span class="score"></span></li>
+                                    <li class="team team-top">Boston University<span class="score"></span></li>
+                                </ul>
+                            </div>	<!-- END ROUND ONE -->          				
+                        </div>
+                    </div>
+                {% else %}
+                    <p>You don't have a bracket. Create one <a href="{{ url_for('bracket.edit_bracket') }}">here</a></p>
+                {% endif %}
+        </section>
+
+{% endblock content %}
