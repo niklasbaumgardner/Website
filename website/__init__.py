@@ -1,24 +1,21 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail, Message
+from flask_bcrypt import Bcrypt
+from flask_login import LoginManager
 # from numpy import random as rand
 
 import os
-# from apscheduler.schedulers.background import BackgroundScheduler
-# import datetime
-# import uuid
 
-# db = SQLAlchemy()
-
+db = SQLAlchemy()
 mail = Mail()
+bcrypt = Bcrypt()
+login_manager = LoginManager()
 
 def create_app():
     app = Flask(__name__)
 
     app.secret_key = os.urandom(24)
-
-    # scheduler = BackgroundScheduler()
-    # scheduler.start()
 
     app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
     app.config['MAIL_PORT'] = 587
@@ -26,11 +23,12 @@ def create_app():
     app.config['MAIL_USERNAME'] = os.environ.get('EMAIL_USER')
     app.config['MAIL_PASSWORD'] = os.environ.get('EMAIL_PASS')
 
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+
+    db.init_app(app)
     mail.init_app(app)
-
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
-
-    # db.init_app(app)
+    bcrypt.init_app(app)
+    login_manager.init_app(app)
 
     # blueprint for auth routes in our app
     from website.user.auth import auth as auth_blueprint

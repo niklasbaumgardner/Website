@@ -13,18 +13,6 @@ from website import mail
 
 # app = Flask(__name__)
 
-# app.secret_key = os.urandom(24)
-
-# scheduler = BackgroundScheduler()
-# scheduler.start()
-
-# app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
-# app.config['MAIL_PORT'] = 587
-# app.config['MAIL_USE_TLS'] = True
-# app.config['MAIL_USERNAME'] = os.environ.get('EMAIL_USER')
-# app.config['MAIL_PASSWORD'] = os.environ.get('EMAIL_PASS')
-# mail = Mail(app)
-
 home = Blueprint('home', __name__)
 # mail = Mail(home)
 

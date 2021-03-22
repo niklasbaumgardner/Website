@@ -24,6 +24,10 @@
             </div>
             <div class="w3-bar w3-border w3-light-grey w3-large">
                 <a href="/" class="w3-bar-item" style="text-decoration: none;">Niklas Baumgardner</a>
+                <a class="w3-bar-item w3-button w3-hover-blue w3-right" href="{{ url_for('auth.logout') }}">Logout</a>
+                <a class="w3-bar-item w3-button w3-hover-blue w3-right" href="{{ url_for('bracket.standings') }}">standings</a>
+                <a class="w3-bar-item w3-button w3-hover-blue w3-right" href="{{ url_for('bracket.my_bracket') }}">Bracket</a>
+                <a class="w3-bar-item w3-button w3-hover-blue w3-right" href="{{ url_for('auth.login') }}">Login</a>
                 <a class="w3-bar-item w3-button w3-mobile w3-hover-blue w3-right w3-hide-small" href="../static/documents/Niklas Baumgardner Resume.pdf" target="_blank">Resume</a>
                 <a class="w3-bar-item w3-button w3-mobile w3-hover-blue w3-right w3-hide-small" href="https://github.com/niklasbaumgardner" target="_blank">Code</a>
                 <!-- <a class="w3-bar-item w3-button w3-mobile w3-hover-blue w3-right w3-hide-small {% block contact %}{% endblock contact %}" href="{{ url_for('home.contact') }}">Contact</a> -->
@@ -38,6 +42,7 @@
                 <!-- <a class="w3-bar-item w3-button w3-hover-blue w3-right {{ self.contact() }}" href="{{ url_for('home.contact') }}">Contact</a> -->
                 <a class="w3-bar-item w3-button w3-hover-blue w3-right" href="https://github.com/niklasbaumgardner" target="_blank">Code</a>
                 <a class="w3-bar-item w3-button w3-hover-blue w3-right" href="../static/documents/Niklas Baumgardner Resume.pdf" target="_blank">Resume</a>
+                
             </div>
         </div>
         
