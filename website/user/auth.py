@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, flash, request, redirect, url_for
-from flask_login import login_user, current_user, logout_user
+from flask_login import login_user, current_user, logout_user, login_required
 from website import db, bcrypt, login_manager
 from website.models import User
 
@@ -18,9 +18,9 @@ def login_post():
 
     if user and bcrypt.check_password_hash(user.password, password):
         # add remember me button
-        login_user(user)
+        login_user(user, remember=True)
         next_page = request.args.get('next')
-        return redirect(next_page) if next_page else redirect(url_for('bracket.standings'))
+        return redirect(next_page or url_for('bracket.standings'))
 
     return render_template("login.html")
 
@@ -56,6 +56,7 @@ def signup_post():
     return render_template("signup.html")
 
 @auth.route('/logout')
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('home.index'))
