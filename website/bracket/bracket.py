@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, redirect, url_for, render_template
 from flask_login import login_required
 # from . import db
 
@@ -7,13 +7,13 @@ bracket = Blueprint('bracket', __name__)
 @bracket.route('/projects/bracket/standings')
 @login_required
 def standings():
-    return 'standings Success'
+    return render_template("standings.html")
 
 
 @bracket.route('/projects/bracket/my_bracket')
 @login_required
 def my_bracket():
-    return 'my_bracket Success'
+    return render_template("my_bracket.html")
 
 # @bracket.route('/')
 # def profile():

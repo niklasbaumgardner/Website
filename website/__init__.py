@@ -17,6 +17,8 @@ def create_app():
 
     app.secret_key = os.urandom(24)
 
+    app.config['TESTING'] = False
+
     app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
     app.config['MAIL_PORT'] = 587
     app.config['MAIL_USE_TLS'] = True
@@ -29,6 +31,8 @@ def create_app():
     mail.init_app(app)
     bcrypt.init_app(app)
     login_manager.init_app(app)
+    login_manager.login_view = 'auth.login'
+    login_manager.login_message_category = 'w3-pale-red'
 
     # blueprint for auth routes in our app
     from website.user.auth import auth as auth_blueprint
