@@ -8,7 +8,6 @@ from flask_mail import Mail, Message
 # from apscheduler.schedulers.background import BackgroundScheduler
 # import datetime
 # import uuid
-from flask import Blueprint, render_template, flash, redirect, url_for
 
 
 # app = Flask(__name__)

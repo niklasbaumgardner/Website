@@ -30,11 +30,11 @@ def create_app():
     # db.init_app(app)
 
     # blueprint for auth routes in our app
-    from Website.user.auth import auth as auth_blueprint
+    from .user.auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
 
     # blueprint for non-auth parts of app
-    from Website.bracket.bracket import bracket as bracket_blueprint
+    from .bracket.bracket import bracket as bracket_blueprint
     app.register_blueprint(bracket_blueprint)
 
     from Website.main.home import home as home_blueprint
@@ -42,10 +42,10 @@ def create_app():
 
     # steganography
 
-    from Website.main.mandelbrot_web import mandelbrot_web as mandelbrot_blueprint
+    from .main.mandelbrot_web import mandelbrot_web as mandelbrot_blueprint
     app.register_blueprint(mandelbrot_blueprint)
 
-    from Website.main.steganography_web import steganography_web as steganography_blueprint
+    from .main.steganography_web import steganography_web as steganography_blueprint
     app.register_blueprint(steganography_blueprint)
 
     return app
