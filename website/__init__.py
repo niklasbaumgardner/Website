@@ -1,18 +1,19 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+# from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail, Message
 from flask_bcrypt import Bcrypt
-from flask_login import LoginManager
+# from flask_login import LoginManager
 from website.config import Config
 from website.commands import create_tables
 # from numpy import random as rand
+from website.extensions import db, login_manager
 
 import os
 
-db = SQLAlchemy()
+# db = SQLAlchemy()
 mail = Mail()
 bcrypt = Bcrypt()
-login_manager = LoginManager()
+# login_manager = LoginManager()
 
 def create_app():
     app = Flask(__name__)
