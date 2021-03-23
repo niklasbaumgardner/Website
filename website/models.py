@@ -16,6 +16,8 @@ class User(db.Model, UserMixin):
 class Bracket(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    points = db.Column(db.Integer, nullable=False)
+    max_points = db.Column(db.Integer, nullable=False)
     name = db.Column(db.String(30), nullable=False)
     year = db.Column(db.String(5), nullable=False)
     game1 = db.Column(db.String(30), nullable=False)

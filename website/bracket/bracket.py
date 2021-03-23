@@ -64,7 +64,8 @@ def submit_bracket():
 
     new_bracket = Bracket(user_id=current_user.get_id(), name=name, year=datetime.today().year, game1=game1, game2=game2,
     game3=game3, game4=game4, game5=game5, game6=game6, game7=game7, game8=game8, game9=game9, game10=game10,
-    game11=game11, game12=game12, game13=game13, game14=game14, game15=game15, w_goals=w_goals, l_goals=l_goals)
+    game11=game11, game12=game12, game13=game13, game14=game14, game15=game15, w_goals=w_goals, l_goals=l_goals,
+    max_points=1000, points=0)
 
     existing_bracket = Bracket.query.filter_by(user_id=current_user.get_id()).first()
 
@@ -89,6 +90,9 @@ def submit_bracket():
         existing_bracket.l_goals = new_bracket.l_goals
 
         existing_bracket.name = new_bracket.name
+
+        existing_bracket.max_points = new_bracket.max_points
+        existing_bracket.points = new_bracket.points
 
         db.session.commit()
     
