@@ -18,7 +18,7 @@ def edit_bracket():
     if bracket:
         return render_template("edit_bracket.html", bracket=bracket)
 
-    return render_template("standings.html")
+    return render_template("edit_bracket.html", bracket=bracket)
 
 @bracket.route('/projects/bracket/view_bracket', defaults={'id': None})
 @bracket.route('/projects/bracket/view_bracket/<int:id>')
