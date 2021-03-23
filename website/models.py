@@ -1,4 +1,4 @@
-from website import db, login_manager
+from website.extensions import db, login_manager
 from flask_login import UserMixin
 
 

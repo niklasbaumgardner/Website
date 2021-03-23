@@ -1,7 +1,7 @@
 from flask import Blueprint, redirect, url_for, render_template, request
 from flask_login import login_user, current_user, logout_user, login_required
 from datetime import datetime
-from website import db
+from website.extensions import db
 from website.models import Bracket
 # from . import db
 
