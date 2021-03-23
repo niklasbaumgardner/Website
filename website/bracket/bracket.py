@@ -9,7 +9,8 @@ bracket = Blueprint('bracket', __name__)
 
 @bracket.route('/projects/bracket/standings')
 def standings():
-    return render_template("standings.html")
+    brackets = Bracket.query.all()
+    return render_template("standings.html", brackets=brackets, enumerate=enumerate)
 
 @bracket.route('/projects/bracket/edit_bracket')
 @login_required

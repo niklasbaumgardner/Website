@@ -15,4 +15,34 @@
         
     </div>
 
+    <header class="hero">
+        <div class="hero-wrap">
+            <!-- <p class="intro" id="intro">NCAA</p>
+                <h1 id="line">Hockey Bracket</h1> -->
+                <p class="year"><i class="fa fa-star"></i> 2021 <i class="fa fa-star"></i></p>
+            <!-- <p>Ballin' Outta Control</p> -->
+        </div>
+    </header>
+
+    {% if brackets %}
+    <div class="w3-cell-row w3-padding-32 content">
+    <div class="w3-container w3-cell" style="width:15%"></div>
+        <div class="w3-container">
+            <table class="w3-table w3-striped w3-bordered w3-border">
+                <tr>
+                    <th>Rank</th><th>Bracket Name</th><th>Winnner</th><th>Points</th><th>Max</th>
+                </tr>
+                {% for i, bracket in enumerate(brackets) %}
+                    <tr class="">
+                        <td>{{ i + 1}}</td><td>{{ bracket.name }}</td><td>{{ bracket.game15 }}</td><td>score</td><td>max</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    <div class="w3-container w3-cell" style="width:15%"></div>
+    </div>
+    {% else %}
+        <h1>No brackets. Click <a href="{{ url_for('bracket.edit_bracket') }}">here</a> to create a bracket</h1>
+    {% endif %}
+
 {% endblock content %}s
