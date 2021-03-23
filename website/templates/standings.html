@@ -33,8 +33,12 @@
                     <th>Rank</th><th>Bracket Name</th><th>Winnner</th><th>Points</th><th>Max</th>
                 </tr>
                 {% for i, bracket in enumerate(brackets) %}
-                    <tr class="">
-                        <td>{{ i + 1}}</td><td>{{ bracket.name }}</td><td>{{ bracket.game15 }}</td><td>score</td><td>max</td>
+                    <tr>
+                        <td><a class="w3-button" href="{{ url_for('bracket.view_bracket', id=bracket.id) }}">{{ i + 1}}</a></td>
+                        <td><a href="{{ url_for('bracket.view_bracket', id=bracket.id) }}">{{ bracket.name }}</a></td>
+                        <td>{{ bracket.game15 }}</td>
+                        <td>score</td>
+                        <td>max</td>
                     </tr>
                 {% endfor %}
             </table>

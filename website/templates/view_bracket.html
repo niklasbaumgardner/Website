@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}My Bracket{% endblock title %}
+{% block title %}Bracket{% endblock title %}
 
 
 
@@ -10,7 +10,6 @@
     <div class="w3-cell-row w3-padding-32">
         <div class="w3-container">
             <br><br>
-            <h1>My Bracket</h1>
         </div>
         
     </div>
@@ -38,8 +37,10 @@
         <section id="bracket">
                 <br>
                 {% if bracket %}
-                    <a class="w3-button w3-blue w3-ripple w3-padding" href="{{ url_for('bracket.edit_bracket') }}">Edit Bracket</a>
-                    <div class="round-details">{{ bracket.name }}</div>
+                    {% if user_id and user_id == bracket.user_id %}
+                        <a class="w3-button w3-blue w3-ripple w3-padding" href="{{ url_for('bracket.edit_bracket') }}">Edit Bracket</a>
+                    {% endif %}
+                    <div class="round-details w3-border">{{ bracket.name }}</div>
                     <br><br>
                     <div class="container">
                         <div class="split split-one">

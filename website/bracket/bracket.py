@@ -25,11 +25,16 @@ def edit_bracket():
 @bracket.route('/projects/bracket/view_bracket/<int:id>')
 def view_bracket(id):
     if id:
-        pass
+        bracket = Bracket.query.filter_by(id=id).first()
+        print(bracket.user_id, current_user.get_id())
+        print(type(bracket.user_id), type(current_user.get_id()))
+        return render_template("view_bracket.html", bracket=bracket, user_id=int(current_user.get_id()))
     else:
         if current_user.is_authenticated:
             bracket = Bracket.query.filter_by(user_id=current_user.get_id()).first()
-            return render_template("view_bracket.html", bracket=bracket)
+            print(bracket.user_id, current_user.get_id())
+            print(type(bracket.user_id), type(current_user.get_id()))
+            return render_template("view_bracket.html", bracket=bracket, user_id=int(current_user.get_id()))
             
 
     return render_template("standings.html")
