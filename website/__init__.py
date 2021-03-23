@@ -4,6 +4,7 @@ from flask_mail import Mail, Message
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from website.config import Config
+from website.commands import create_tables
 # from numpy import random as rand
 
 import os
