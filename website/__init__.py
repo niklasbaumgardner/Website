@@ -7,6 +7,7 @@ from website.config import Config
 from website.commands import create_tables
 # from numpy import random as rand
 from website.extensions import db, login_manager
+import psycopg2
 
 import os
 
@@ -47,6 +48,8 @@ def create_app():
     app.register_blueprint(steganography_blueprint)
 
     app.cli.add_command(create_tables)
+
+    # conn = psycopg2.connect(os.environ.get('DATABASE_URL'), sslmode='require')
 
     return app
 
