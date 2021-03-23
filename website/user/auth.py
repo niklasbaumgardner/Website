@@ -21,7 +21,7 @@ def login_post():
         # add remember me button
         login_user(user)
         next_page = request.args.get('next')
-        return redirect(next_page or url_for('bracket.standings'))
+        return redirect(next_page or url_for('bracket.view_bracket'))
 
     return render_template("login.html")
 
@@ -36,14 +36,17 @@ def signup_post():
         email = request.form['email']
         password1 = request.form['password1']
         password2 = request.form['password2']
-        hash_ = bcrypt.generate_password_hash(password1).decode('utf-8')
 
-        # check if email in db
-        # User.query.first()
         user = User.query.filter_by(email=email).first()
+
         if user:
             flash('Email already exists. Please log in', 'w3-pale-red')
-            return render_template("login.html")
+            return render_template("login.html", email=email)
+
+        if password1 != password2:
+            flash('Passwords don\'t match. Try again', 'w3-pale-red')
+            return render_template("signup.html", email=email)
+        hash_ = bcrypt.generate_password_hash(password1).decode('utf-8')
 
         new_user = User(email=email, password=hash_)
         db.session.add(new_user)

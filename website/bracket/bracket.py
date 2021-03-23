@@ -26,14 +26,16 @@ def edit_bracket():
 def view_bracket(id):
     if id:
         bracket = Bracket.query.filter_by(id=id).first()
-        print(bracket.user_id, current_user.get_id())
-        print(type(bracket.user_id), type(current_user.get_id()))
-        return render_template("view_bracket.html", bracket=bracket, user_id=int(current_user.get_id()))
+        # print(bracket.user_id, current_user.get_id())
+        # print(type(bracket.user_id), type(current_user.get_id()))
+        if current_user.is_authenticated:
+            return render_template("view_bracket.html", bracket=bracket, user_id=int(current_user.get_id()))
+        return render_template("view_bracket.html", bracket=bracket)
     else:
         if current_user.is_authenticated:
             bracket = Bracket.query.filter_by(user_id=current_user.get_id()).first()
-            print(bracket.user_id, current_user.get_id())
-            print(type(bracket.user_id), type(current_user.get_id()))
+            # print(bracket.user_id, current_user.get_id())
+            # print(type(bracket.user_id), type(current_user.get_id()))
             return render_template("view_bracket.html", bracket=bracket, user_id=int(current_user.get_id()))
             
 
