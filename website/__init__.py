@@ -25,9 +25,6 @@ def create_app():
     login_manager.login_view = 'auth.login'
     login_manager.login_message_category = 'w3-pale-red'
 
-    with app.app_context():
-        db.create_all()
-
     # blueprint for auth routes in our app
     from website.user.auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
@@ -46,6 +43,8 @@ def create_app():
 
     from website.steganography.steganography_web import steganography_web as steganography_blueprint
     app.register_blueprint(steganography_blueprint)
+
+    app.cli.add_command(create_tables)
 
     return app
 
