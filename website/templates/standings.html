@@ -25,20 +25,29 @@
     </header>
 
     {% if brackets %}
+    <!-- <a class="w3-button w3-blue w3-ripple w3-padding" href="{{ url_for('bracket.update_points') }}">Update Points</a> -->
     <div class="w3-cell-row w3-padding-32 content">
     <div class="w3-container w3-cell" style="width:15%"></div>
         <div class="w3-container">
             <table class="w3-table w3-striped w3-bordered w3-border">
                 <tr>
-                    <th>Rank</th><th>Bracket Name</th><th>Winnner</th><th>Points</th><th>Max</th>
+                    <th class="w3-center">Rank</th><th class="w3-center">Bracket Name</th><th class="w3-center">Winnner</th><th class="w3-center">Points</th><th class="w3-center">Max</th>
                 </tr>
                 {% for i, bracket in enumerate(brackets) %}
                     <tr>
-                        <td><a class="w3-button" href="{{ url_for('bracket.view_bracket', id=bracket.id) }}">{{ i + 1}}</a></td>
-                        <td><a href="{{ url_for('bracket.view_bracket', id=bracket.id) }}">{{ bracket.name }}</a></td>
-                        <td>{{ bracket.game15 }}</td>
-                        <td>score</td>
-                        <td>max</td>
+                        <!-- <td style="padding:0">
+                            <a class="" href="{{ url_for('bracket.view_bracket', id=bracket.id) }}">
+                                <div style="height:100%;width:100%">{{ i + 1}}</div>
+                            </a>
+                        </td> -->
+                        <td style="padding:0;"><a style="width: 100%;" class="w3-button" href="{{ url_for('bracket.view_bracket', id=bracket.id) }}">{{ i + 1}}</a></td>
+                        <td style="padding:0;"><a style="width: 100%;" class="w3-button" href="{{ url_for('bracket.view_bracket', id=bracket.id) }}">{{ bracket.name }}</a></td>
+                        <td style="padding:0;"><a style="width: 100%;" class="w3-button" href="{{ url_for('bracket.view_bracket', id=bracket.id) }}">{{ bracket.game15 }}</a></td>
+                        <td style="padding:0;"><a style="width: 100%;" class="w3-button" href="{{ url_for('bracket.view_bracket', id=bracket.id) }}">{{ bracket.points }}</a></td>
+                        <td style="padding:0;"><a style="width: 100%;" class="w3-button" href="{{ url_for('bracket.view_bracket', id=bracket.id) }}">{{ bracket.max_points }}</a></td>
+                        <!-- <td>{{ bracket.game15 }}</td>
+                        <td>{{ bracket.points }}</td>
+                        <td>{{ bracket.max_points }}</td> -->
                     </tr>
                 {% endfor %}
             </table>
@@ -49,4 +58,4 @@
         <h1>No brackets. Click <a href="{{ url_for('bracket.edit_bracket') }}">here</a> to create a bracket</h1>
     {% endif %}
 
-{% endblock content %}s
+{% endblock content %}

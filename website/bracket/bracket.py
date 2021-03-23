@@ -1,15 +1,78 @@
 from flask import Blueprint, redirect, url_for, render_template, request
 from flask_login import login_user, current_user, logout_user, login_required
 from datetime import datetime
-from website.extensions import db
+from website.extensions import db, TEAMS
 from website.models import Bracket
+from website import bcrypt
+import os
 # from . import db
 
 bracket = Blueprint('bracket', __name__)
 
+@bracket.route('/projects/bracket/correct_bracket')
+@login_required
+def orrect_bracket():
+    CORRECT_BRACKET = Bracket.query.filter_by(name='CORRECT_BRACKET', id=0).first()
+    return render_template('correct_bracket.html', bracket=CORRECT_BRACKET)
+
+@bracket.route('/projects/bracket/update_correct_bracket', methods=["POST"])
+@login_required
+def update_correct_bracket():
+    game1 = request.form.get('game1')
+    game2 = request.form.get('game2')
+    game3 = request.form.get('game3')
+    game4 = request.form.get('game4')
+    game5 = request.form.get('game5')
+    game6 = request.form.get('game6')
+    game7 = request.form.get('game7')
+    game8 = request.form.get('game8')
+    game9 = request.form.get('game9')
+    game10 = request.form.get('game10')
+    game11 = request.form.get('game11')
+    game12 = request.form.get('game12')
+    game13 = request.form.get('game13')
+    game14 = request.form.get('game14')
+    game15 = request.form.get('game15')
+
+    password = request.form.get('password')
+    correct_pass = os.environ.get('CORRECT_PASSWORD')
+
+    if bcrypt.check_password_hash(correct_pass, password):
+        new_bracket = Bracket(game1=game1, game2=game2,
+            game3=game3, game4=game4, game5=game5, game6=game6, game7=game7, game8=game8, game9=game9, game10=game10,
+            game11=game11, game12=game12, game13=game13, game14=game14, game15=game15)
+        
+        CORRECT_BRACKET = Bracket.query.filter_by(name='CORRECT_BRACKET', id=0).first()
+
+        CORRECT_BRACKET.game1 = new_bracket.game1
+        CORRECT_BRACKET.game2 = new_bracket.game2
+        CORRECT_BRACKET.game3 = new_bracket.game3
+        CORRECT_BRACKET.game4 = new_bracket.game4
+        CORRECT_BRACKET.game5 = new_bracket.game5
+        CORRECT_BRACKET.game6 = new_bracket.game6
+        CORRECT_BRACKET.game7 = new_bracket.game7
+        CORRECT_BRACKET.game8 = new_bracket.game8
+        CORRECT_BRACKET.game9 = new_bracket.game9
+        CORRECT_BRACKET.game10 = new_bracket.game10
+        CORRECT_BRACKET.game11 = new_bracket.game11
+        CORRECT_BRACKET.game12 = new_bracket.game12
+        CORRECT_BRACKET.game13 = new_bracket.game13
+        CORRECT_BRACKET.game14 = new_bracket.game14
+        CORRECT_BRACKET.game15 = new_bracket.game15
+
+        db.session.commit()
+
+
+        return redirect(url_for('bracket.update_points'))
+
+
+    return redirect(url_for('bracket.standings'))
+
 @bracket.route('/projects/bracket/standings')
 def standings():
-    brackets = Bracket.query.all()
+    brackets = Bracket.query.filter(Bracket.name != 'CORRECT_BRACKET').filter(Bracket.id !=0).all()
+    brackets.sort(key=lambda b: b.points)
+    brackets.sort(key=lambda b: b.max_points)
     return render_template("standings.html", brackets=brackets, enumerate=enumerate)
 
 @bracket.route('/projects/bracket/edit_bracket')
@@ -24,7 +87,8 @@ def edit_bracket():
 @bracket.route('/projects/bracket/view_bracket', defaults={'id': None})
 @bracket.route('/projects/bracket/view_bracket/<int:id>')
 def view_bracket(id):
-    if id:
+    # keep as if id:
+    if id is not None:
         bracket = Bracket.query.filter_by(id=id).first()
         # print(bracket.user_id, current_user.get_id())
         # print(type(bracket.user_id), type(current_user.get_id()))
@@ -62,12 +126,12 @@ def submit_bracket():
     name = request.form.get('name')
     w_goals = request.form.get('w_goals')
     l_goals = request.form.get('l_goals')
-    print(game1, game2, game3, game4, game5, game6, game7, game8, game9, game10, game11, game12, game13, game14, game15)
+    # print(game1, game2, game3, game4, game5, game6, game7, game8, game9, game10, game11, game12, game13, game14, game15)
 
     new_bracket = Bracket(user_id=current_user.get_id(), name=name, year=datetime.today().year, game1=game1, game2=game2,
     game3=game3, game4=game4, game5=game5, game6=game6, game7=game7, game8=game8, game9=game9, game10=game10,
     game11=game11, game12=game12, game13=game13, game14=game14, game15=game15, w_goals=w_goals, l_goals=l_goals,
-    max_points=1000, points=0)
+    max_points=320, points=0)
 
     existing_bracket = Bracket.query.filter_by(user_id=current_user.get_id()).first()
 
@@ -93,8 +157,8 @@ def submit_bracket():
 
         existing_bracket.name = new_bracket.name
 
-        existing_bracket.max_points = new_bracket.max_points
-        existing_bracket.points = new_bracket.points
+        # existing_bracket.max_points = new_bracket.max_points
+        # existing_bracket.points = new_bracket.points
 
         db.session.commit()
     
@@ -104,3 +168,135 @@ def submit_bracket():
 
     # return render_template("view_bracket.html")
     return redirect(url_for('bracket.view_bracket'))
+
+
+@bracket.route('/projects/bracket/update_points')
+@login_required
+def update_points():
+    CORRECT_BRACKET = Bracket.query.filter_by(name='CORRECT_BRACKET', id=0).first()
+    brackets = Bracket.query.filter(Bracket.name != 'CORRECT_BRACKET').filter(Bracket.id !=0).all()
+    
+    for bracket in brackets:
+        update_bracket_points(bracket, CORRECT_BRACKET)
+    db.session.commit()
+    return redirect(url_for('bracket.standings'))
+
+
+def update_bracket_points(bracket, CORRECT_BRACKET):
+
+    points = 0
+
+    # ROUND 1
+    if bracket.game1 == CORRECT_BRACKET.game1:
+        points += 10
+    if bracket.game2 == CORRECT_BRACKET.game2:
+        points += 10
+    if bracket.game3 == CORRECT_BRACKET.game3:
+        points += 10
+    if bracket.game4 == CORRECT_BRACKET.game4:
+        points += 10
+    if bracket.game5 == CORRECT_BRACKET.game5:
+        points += 10
+    if bracket.game6 == CORRECT_BRACKET.game6:
+        points += 10
+    if bracket.game7 == CORRECT_BRACKET.game7:
+        points += 10
+    if bracket.game8 == CORRECT_BRACKET.game8:
+        points += 10
+
+    # ROUND 2
+    if bracket.game9 == CORRECT_BRACKET.game9:
+        points += 20
+    if bracket.game10 == CORRECT_BRACKET.game10:
+        points += 20
+    if bracket.game11 == CORRECT_BRACKET.game11:
+        points += 20
+    if bracket.game12 == CORRECT_BRACKET.game12:
+        points += 20
+
+    # ROUND 3
+    if bracket.game13 == CORRECT_BRACKET.game13:
+        points += 40
+    if bracket.game14 == CORRECT_BRACKET.game14:
+        points += 40
+
+    # WINNER
+    if bracket.game15 == CORRECT_BRACKET.game15:
+        points += 80
+
+    bracket.points = points
+    bracket.max_points = update_max(bracket, CORRECT_BRACKET)
+
+
+def update_max(bracket, CORRECT_BRACKET):
+    max_points = 0
+
+    # ROUND 1
+    game1 = False
+    game2 = False
+    game3 = False
+    game4 = False
+    game5 = False
+    game6 = False
+    game7 = False
+    game8 = False
+    if CORRECT_BRACKET.game1 not in TEAMS or bracket.game1 == CORRECT_BRACKET.game1:
+        max_points += 10
+        game1 = True
+    if CORRECT_BRACKET.game2 not in TEAMS or bracket.game2 == CORRECT_BRACKET.game2:
+        max_points += 10
+        game2 = True
+    if CORRECT_BRACKET.game3 not in TEAMS or bracket.game3 == CORRECT_BRACKET.game3:
+        max_points += 10
+        game3 = True
+    if CORRECT_BRACKET.game4 not in TEAMS or bracket.game4 == CORRECT_BRACKET.game4:
+        max_points += 10
+        game4 = True
+    if CORRECT_BRACKET.game5 not in TEAMS or bracket.game5 == CORRECT_BRACKET.game5:
+        max_points += 10
+        game5 = True
+    if CORRECT_BRACKET.game6 not in TEAMS or bracket.game6 == CORRECT_BRACKET.game6:
+        max_points += 10
+        game6 = True
+    if CORRECT_BRACKET.game7 not in TEAMS or bracket.game7 == CORRECT_BRACKET.game7:
+        max_points += 10
+        game7 = True
+    if CORRECT_BRACKET.game8 not in TEAMS or bracket.game8 == CORRECT_BRACKET.game8:
+        max_points += 10
+        game8 = True
+
+    print(max_points)
+    # ROUND 2
+    game9 = False
+    game10 = False
+    game11 = False
+    game12 = False
+    if CORRECT_BRACKET.game9 not in TEAMS and (game1 or game2 or bracket.game9 == CORRECT_BRACKET.game1 or bracket.game9 == CORRECT_BRACKET.game2) or bracket.game9 == CORRECT_BRACKET.game9:
+        max_points += 20
+        game9 = True
+    if CORRECT_BRACKET.game10 not in TEAMS and (game3 or game4 or bracket.game10 == CORRECT_BRACKET.game3 or bracket.game10 == CORRECT_BRACKET.game4) or bracket.game10 == CORRECT_BRACKET.game10:
+        max_points += 20
+        game10 = True
+    if CORRECT_BRACKET.game11 not in TEAMS and (game5 or game6 or bracket.game11 == CORRECT_BRACKET.game5 or bracket.game11 == CORRECT_BRACKET.game6) or bracket.game11 == CORRECT_BRACKET.game11:
+        max_points += 20
+        game11 = True
+    if CORRECT_BRACKET.game12 not in TEAMS and game8 or game8 or (bracket.game12 == CORRECT_BRACKET.game7 or bracket.game12 == CORRECT_BRACKET.game8) or bracket.game12 == CORRECT_BRACKET.game12:
+        max_points += 20
+        game12 = True
+    print(max_points)
+
+    # ROUND 3
+    game13 = False
+    game14 = False
+    if CORRECT_BRACKET.game13 not in TEAMS and (game9 or game10 or bracket.game13 == CORRECT_BRACKET.game9 or bracket.game13 == CORRECT_BRACKET.game10) or bracket.game13 == CORRECT_BRACKET.game13:
+        max_points += 40
+        game13 = True
+    if CORRECT_BRACKET.game14 not in TEAMS and (game11 or game12 or bracket.game14 == CORRECT_BRACKET.game11 or bracket.game14 == CORRECT_BRACKET.game12) or bracket.game14 == CORRECT_BRACKET.game14:
+        max_points += 40
+        game14 = True
+
+    # WINNER
+    if CORRECT_BRACKET.game15 not in TEAMS and (game13 or game14 or bracket.game15 == CORRECT_BRACKET.game13 or bracket.game15 == CORRECT_BRACKET.game14) or bracket.game15 == CORRECT_BRACKET.game15:
+        max_points += 80
+
+    return max_points

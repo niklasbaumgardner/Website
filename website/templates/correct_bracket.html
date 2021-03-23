@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}My Bracket{% endblock title %}
+
+
+
+{% block content %}
+
+
+    <!-- <div class="w3-cell-row w3-padding-32">
+        <div class="w3-container">
+            <br><br>
+            <h1>My Bracket</h1>
+        </div>
+        
+    </div> -->
+
+        
+    
+    
+        <section id="bracket">
+            <form action="{{ url_for('bracket.update_correct_bracket') }}" method="POST">
+                {% if bracket %}
+
+                <div class="w3-cell-row w3-padding-32 content">
+                <div class="w3-container w3-cell" style="width:15%"></div>
+                    <div class="w3-container">
+                        <br><label for="game1">Game 1</label><br>
+                        <input name="game1" type="text" value="{{ bracket.game1 }}">
+
+                        <br><label for="game2">Game 2</label><br>
+                        <input name="game2" type="text" value="{{ bracket.game2 }}">
+
+                        <br><label for="game3">Game 3</label><br>
+                        <input name="game3" type="text" value="{{ bracket.game3 }}">
+
+                        <br><label for="game4">Game 4</label><br>
+                        <input name="game4" type="text" value="{{ bracket.game4 }}">
+
+                        <br><label for="game5">Game 5</label><br>
+                        <input name="game5" type="text" value="{{ bracket.game5 }}">
+
+                        <br><label for="game6">Game 6</label><br>
+                        <input name="game6" type="text" value="{{ bracket.game6 }}">
+                        
+                        <br><label for="game7">Game 7</label><br>
+                        <input name="game7" type="text" value="{{ bracket.game7 }}">
+
+                        <br><label for="game8">Game 8</label><br>
+                        <input name="game8" type="text" value="{{ bracket.game8 }}">
+
+                        <br><label for="game9">Game 9</label><br>
+                        <input name="game9" type="text" value="{{ bracket.game9 }}">
+
+                        <br><label for="game10">Game 10</label><br>
+                        <input name="game10" type="text" value="{{ bracket.game10 }}">
+
+                        <br><label for="game11">Game 11</label><br>
+                        <input name="game11" type="text" value="{{ bracket.game11 }}">
+
+                        <br><label for="game12">Game 12</label><br>
+                        <input name="game12" type="text" value="{{ bracket.game12 }}">
+
+                        <br><label for="game13">Game 13</label><br>
+                        <input name="game13" type="text" value="{{ bracket.game13 }}">
+
+                        <br><label for="game14">Game 14</label><br>
+                        <input name="game14" type="text" value="{{ bracket.game14 }}">
+
+                        <br><label for="game15">Game 15</label><br>
+                        <input name="game15" type="text" value="{{ bracket.game15 }}">
+
+                        <br><label for="password">Password</label><br>
+                        <input name="password" type="password" placeholder="Password">
+                        <br><br>
+                        <input class="w3-button w3-blue w3-ripple w3-padding" type="submit" value="Submit Correct bracket">
+                    </div>
+                <div class="w3-container w3-cell" style="width:15%"></div>
+                </div> </div> 
+                    
+                {% else %}
+                    <h1>Correct bracket not found</h1>
+                {% endif %}
+                
+            </form>
+        </section>
+
+{% endblock content %}
