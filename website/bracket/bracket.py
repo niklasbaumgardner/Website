@@ -28,8 +28,8 @@ def view_bracket(id):
     else:
         if current_user.is_authenticated:
             bracket = Bracket.query.filter_by(user_id=current_user.get_id()).first()
-            if bracket:
-                return render_template("view_bracket.html", bracket=bracket)
+            return render_template("view_bracket.html", bracket=bracket)
+            
 
     return render_template("standings.html")
 
