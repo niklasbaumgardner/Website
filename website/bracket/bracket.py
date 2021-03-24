@@ -113,7 +113,7 @@ def view_bracket(id):
         if current_user.is_authenticated:
             curr_user_id = int(current_user.get_id())
             if not id or (id and id == curr_user_id):
-                bracket = Bracket.query.filter_by(id=curr_user_id).first()
+                bracket = Bracket.query.filter_by(user_id=curr_user_id).first()
                 return render_template("view_bracket.html", bracket=bracket, user_id=curr_user_id)
             else:
                 return redirect(url_for('bracket.standings'))
