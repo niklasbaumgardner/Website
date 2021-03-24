@@ -22,8 +22,14 @@ def login_post():
         login_user(user)
         next_page = request.args.get('next')
         return redirect(next_page or url_for('bracket.view_bracket'))
+    
+    elif user:
+        flash('Password was incorrect. Try again', 'w3-pale-red')
+        return render_template("login.html", email=email)
 
-    return render_template("login.html")
+    flash('User not found. Please create an acount', 'w3-pale-red')
+
+    return render_template("login.html", email=email)
 
 @auth.route('/bracket/signup')
 def signup():
@@ -52,7 +58,7 @@ def signup_post():
         db.session.add(new_user)
         db.session.commit()
         flash('Sign up succesful', 'w3-pale-green')
-        return render_template("login.html")
+        return render_template("login.html", email=email)
     
     except:
         flash('Sign up failed', 'w3-pale-red')

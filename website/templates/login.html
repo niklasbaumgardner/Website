@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
 {% block title %}Login In{% endblock title %}
+{% block icon %}../static/images/nb.png{% endblock icon %}
+{% block login %}w3-text-blue{% endblock login %}
 
 
 
@@ -37,7 +39,7 @@
                 <input class="w3-input w3-border w3-animate-input" type="text" id="name" name="name" placeholder="Your name" style="width:50%"> -->
             
                 <label class="" for="email"><h4 style="text-align: left;">Email</h4></label>
-                <input class="w3-input w3-border w3-animate-input" type="text" id="email" name="email" placeholder="Your email" {% if email %}value="{{ email }}"{% endif %} style="width:50%">
+                <input class="w3-input w3-border w3-animate-input" type="email" id="email" name="email" placeholder="Your email" {% if email %}value="{{ email }}"{% endif %} style="width:50%">
             
                 <label class="" for="password"><h4 style="text-align: left;">Password</h4></label>
                 <input class="w3-input w3-border w3-animate-input" type="password" id="password" name="password" placeholder="Password" style="width:50%">

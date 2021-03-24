@@ -25,14 +25,14 @@
             <div class="w3-bar w3-border w3-light-grey w3-large">
                 <a href="/" class="w3-bar-item" style="text-decoration: none;">Niklas Baumgardner</a>
                 {% if current_user.is_authenticated %}
-                    <a class="w3-bar-item w3-button w3-hover-blue w3-right" href="{{ url_for('auth.logout') }}">Logout</a>
+                    <a class="w3-bar-item w3-button w3-hover-blue w3-right w3-hide-small" href="{{ url_for('auth.logout') }}">Logout</a>
                 {% else %}
-                    <a class="w3-bar-item w3-button w3-hover-blue w3-right" href="{{ url_for('auth.login') }}">Login</a>
+                    <a class="w3-bar-item w3-button w3-hover-blue w3-right w3-hide-small {% block login %}{% endblock login %}" href="{{ url_for('auth.login') }}">Login</a>
                 {% endif %}
-                <a class="w3-bar-item w3-button w3-hover-blue w3-right" href="{{ url_for('bracket.standings') }}">standings</a>
-                <a class="w3-bar-item w3-button w3-hover-blue w3-right" href="{{ url_for('bracket.view_bracket') }}">Bracket</a>
-                <a class="w3-bar-item w3-button w3-mobile w3-hover-blue w3-right w3-hide-small" href="../static/documents/Niklas Baumgardner Resume.pdf" target="_blank">Resume</a>
-                <a class="w3-bar-item w3-button w3-mobile w3-hover-blue w3-right w3-hide-small" href="https://github.com/niklasbaumgardner" target="_blank">Code</a>
+                <a class="w3-bar-item w3-button w3-hover-blue w3-right w3-hide-small {% block standings %}{% endblock standings %}" href="{{ url_for('bracket.standings') }}">Bracket Standings</a>
+                <a class="w3-bar-item w3-button w3-hover-blue w3-right w3-hide-small {% block bracket %}{% endblock bracket %}" href="{{ url_for('bracket.view_bracket') }}">Bracket</a>
+                <!-- <a class="w3-bar-item w3-button w3-mobile w3-hover-blue w3-right w3-hide-small" href="../static/documents/Niklas Baumgardner Resume.pdf" target="_blank">Resume</a>
+                <a class="w3-bar-item w3-button w3-mobile w3-hover-blue w3-right w3-hide-small" href="https://github.com/niklasbaumgardner" target="_blank">Code</a> -->
                 <a class="w3-bar-item w3-button w3-mobile w3-hover-blue w3-right w3-hide-small {% block projects %}{% endblock projects %}" href="{{ url_for('home.projects') }}">Projects</a>
                 <a class="w3-bar-item w3-button w3-mobile w3-hover-blue w3-right w3-hide-small {% block home %}{% endblock home %}" href="/">Home</a>
                 <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="myFunction()">&#9776;</a>
@@ -41,8 +41,15 @@
             <div id="side" class="w3-bar-block w3-light-grey w3-hide w3-hide-large w3-hide-medium">
                 <a class="w3-bar-item w3-button w3-hover-blue w3-right {{ self.home() }}" href="/">Home</a>
                 <a class="w3-bar-item w3-button w3-hover-blue w3-right {{ self.projects() }}" href="{{ url_for('home.projects') }}">Projects</a>
-                <a class="w3-bar-item w3-button w3-hover-blue w3-right" href="https://github.com/niklasbaumgardner" target="_blank">Code</a>
-                <a class="w3-bar-item w3-button w3-hover-blue w3-right" href="../static/documents/Niklas Baumgardner Resume.pdf" target="_blank">Resume</a>
+                <a class="w3-bar-item w3-button w3-hover-blue w3-right {{ self.bracket() }}" href="{{ url_for('bracket.view_bracket') }}">Bracket</a>
+                <a class="w3-bar-item w3-button w3-hover-blue w3-right {{ self.standings() }}" href="{{ url_for('bracket.standings') }}">Bracket Standings</a>
+                {% if current_user.is_authenticated %}
+                    <a class="w3-bar-item w3-button w3-hover-blue w3-right" href="{{ url_for('auth.logout') }}">Logout</a>
+                {% else %}
+                    <a class="w3-bar-item w3-button w3-hover-blue w3-right" href="{{ url_for('auth.login') }}">Login</a>
+                {% endif %}
+                <!-- <a class="w3-bar-item w3-button w3-hover-blue w3-right" href="https://github.com/niklasbaumgardner" target="_blank">Code</a>
+                <a class="w3-bar-item w3-button w3-hover-blue w3-right" href="../static/documents/Niklas Baumgardner Resume.pdf" target="_blank">Resume</a> -->
                 
             </div>
         </div>

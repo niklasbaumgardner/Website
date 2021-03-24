@@ -1,6 +1,7 @@
-from flask import Blueprint, redirect, url_for, render_template, request
+from flask import Blueprint, redirect, url_for, render_template, request, flash
 from flask_login import login_user, current_user, logout_user, login_required
 from datetime import datetime
+from pytz import timezone
 from website.extensions import db, TEAMS
 from website.models import Bracket
 from website import bcrypt
@@ -8,6 +9,8 @@ import os
 # from . import db
 
 bracket = Blueprint('bracket', __name__)
+TIMEZONE = timezone('EST')
+FIRST_GAME = datetime(year=2021, month=3, day=26, hour=13, tzinfo=TIMEZONE)
 
 @bracket.route('/projects/bracket/correct_bracket')
 @login_required
@@ -62,48 +65,76 @@ def update_correct_bracket():
 
         db.session.commit()
 
-
         return redirect(url_for('bracket.update_points'))
-
 
     return redirect(url_for('bracket.standings'))
 
 @bracket.route('/projects/bracket/standings')
 def standings():
+    clickable = False
     brackets = Bracket.query.filter(Bracket.name != 'CORRECT_BRACKET').filter(Bracket.id !=0).all()
-    brackets.sort(key=lambda b: b.points)
-    brackets.sort(key=lambda b: b.max_points)
-    return render_template("standings.html", brackets=brackets, enumerate=enumerate)
+    brackets.sort(key=lambda b: b.max_points, reverse=True)
+    brackets.sort(key=lambda b: b.points, reverse=True)
+
+    if datetime.now(TIMEZONE) > FIRST_GAME:
+        clickable = True
+    
+    return render_template("standings.html", brackets=brackets, enumerate=enumerate, clickable=clickable)
+
 
 @bracket.route('/projects/bracket/edit_bracket')
 @login_required
 def edit_bracket():
     bracket = Bracket.query.filter_by(user_id=current_user.get_id()).first()
-    if bracket:
-        return render_template("edit_bracket.html", bracket=bracket)
 
     return render_template("edit_bracket.html", bracket=bracket)
+
 
 @bracket.route('/projects/bracket/view_bracket', defaults={'id': None})
 @bracket.route('/projects/bracket/view_bracket/<int:id>')
 def view_bracket(id):
     # keep as if id:
-    if id is not None:
+
+    if datetime.now(TIMEZONE) > FIRST_GAME:
+        if id and not current_user.is_authenticated:
+            bracket = Bracket.query.filter_by(id=id).first()
+            return render_template("view_bracket.html", bracket=bracket)
+
+        elif current_user.is_authenticated:
+            curr_user_id = int(current_user.get_id())
+            if id == curr_user_id:
+                bracket = Bracket.query.filter_by(id=id).first()
+                return render_template("view_bracket.html", bracket=bracket, user_id=curr_user_id)
+            
+            else:
+                bracket = Bracket.query.filter_by(id=id).first()
+                return render_template("view_bracket.html", bracket=bracket)
+    else:
+        if current_user.is_authenticated:
+            curr_user_id = int(current_user.get_id())
+            if not id or (id and id == curr_user_id):
+                bracket = Bracket.query.filter_by(id=id).first()
+                return render_template("view_bracket.html", bracket=bracket, user_id=curr_user_id)
+            else:
+                return redirect(url_for('bracket.standings'))
+
+    flash('Login to view your bracket', 'w3-pale-red')
+    return redirect(url_for('auth.login'))
+
+
+
+    if id:
         bracket = Bracket.query.filter_by(id=id).first()
-        # print(bracket.user_id, current_user.get_id())
-        # print(type(bracket.user_id), type(current_user.get_id()))
         if current_user.is_authenticated:
             return render_template("view_bracket.html", bracket=bracket, user_id=int(current_user.get_id()))
         return render_template("view_bracket.html", bracket=bracket)
     else:
         if current_user.is_authenticated:
             bracket = Bracket.query.filter_by(user_id=current_user.get_id()).first()
-            # print(bracket.user_id, current_user.get_id())
-            # print(type(bracket.user_id), type(current_user.get_id()))
             return render_template("view_bracket.html", bracket=bracket, user_id=int(current_user.get_id()))
             
 
-    return render_template("standings.html")
+    return redirect(url_for('bracket.standings'))
 
 @bracket.route('/projects/bracket/submit_bracket', methods=['POST'])
 @login_required
