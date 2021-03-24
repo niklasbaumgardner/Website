@@ -102,12 +102,14 @@ def view_bracket(id):
 
         elif current_user.is_authenticated:
             curr_user_id = int(current_user.get_id())
-            if id == curr_user_id:
+            if id: # == curr_user_id:
                 bracket = Bracket.query.filter_by(id=id).first()
-                return render_template("view_bracket.html", bracket=bracket, user_id=curr_user_id)
+                if bracket.user_id == curr_user_id:
+                    return render_template("view_bracket.html", bracket=bracket, user_id=curr_user_id)
+                return render_template("view_bracket.html", bracket=bracket)
             
             else:
-                bracket = Bracket.query.filter_by(id=id).first()
+                bracket = Bracket.query.filter_by(user_id=curr_user_id).first()
                 return render_template("view_bracket.html", bracket=bracket)
     else:
         if current_user.is_authenticated:
@@ -123,18 +125,18 @@ def view_bracket(id):
 
 
 
-    if id:
-        bracket = Bracket.query.filter_by(id=id).first()
-        if current_user.is_authenticated:
-            return render_template("view_bracket.html", bracket=bracket, user_id=int(current_user.get_id()))
-        return render_template("view_bracket.html", bracket=bracket)
-    else:
-        if current_user.is_authenticated:
-            bracket = Bracket.query.filter_by(user_id=current_user.get_id()).first()
-            return render_template("view_bracket.html", bracket=bracket, user_id=int(current_user.get_id()))
+    # if id:
+    #     bracket = Bracket.query.filter_by(id=id).first()
+    #     if current_user.is_authenticated:
+    #         return render_template("view_bracket.html", bracket=bracket, user_id=int(current_user.get_id()))
+    #     return render_template("view_bracket.html", bracket=bracket)
+    # else:
+    #     if current_user.is_authenticated:
+    #         bracket = Bracket.query.filter_by(user_id=current_user.get_id()).first()
+    #         return render_template("view_bracket.html", bracket=bracket, user_id=int(current_user.get_id()))
             
 
-    return redirect(url_for('bracket.standings'))
+    # return redirect(url_for('bracket.standings'))
 
 @bracket.route('/bracket/submit_bracket', methods=['POST'])
 @login_required
