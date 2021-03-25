@@ -224,7 +224,7 @@
                                 </ul>
                                 <br><br><br><br>
                                 <ul class="matchup">
-                                    <li class="team team-top"><input onclick="game10_team1('Wisconsin')" type="radio" name="game3" value="Wisconsin" required {% if bracket.game3 == "Wisconsin" %}checked{% endif %}> Wisconsin<span class="score"></span></li>
+                                    <li class="team team-top"><input onclick="game10_team1('Wisconsin')" type="radio" name="game3" value="Wisconsin" required {% if bracket.game3 == "Wisconsin" %}checked{% endif %}> 4 Wisconsin<span class="score"></span></li>
                                     <li class="team team-top"><input onclick="game10_team1('Bemidji State')" type="radio" name="game3" value="Bemidji State" {% if bracket.game3 == "Bemidji State" %}checked{% endif %}> Bemidji State<span class="score"></span></li>
                                 </ul>
                                 <br>
@@ -268,12 +268,15 @@
                                 </ul>
                                 
                             </div>
-                            <div class="semis-r">		
-                                <div class="round-details">Final Score</div>	
-                                <label for="w_goals">Winner goals</label><br>
-                                <input name="w_goals" class="team" type="number" size="2" required value="{{ bracket.w_goals }}">
-                                <label for="l_goals">Loser goals</label><br>
-                                <input name="l_goals" class="team" type="number" size="2" required value="{{ bracket.l_goals }}">
+                            <div class="semis-r">
+                                <fieldset>
+                                    <legend>Final Game Score</legend>	
+                                    <label for="w_goals">Winner goals</label><br>
+                                    <input name="w_goals" class="team" type="number" size="2" required value="{{ bracket.w_goals }}">
+                                    <label for="l_goals">Loser goals</label><br>
+                                    <input name="l_goals" class="team" type="number" size="2" required value="{{ bracket.l_goals }}">
+                                </fieldset>	
+                                
                             </div>
                         </div>
                     

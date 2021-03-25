@@ -42,7 +42,7 @@
                     {% if user_id and user_id == bracket.user_id %}
                         <a class="w3-button w3-blue w3-ripple w3-padding" href="{{ url_for('bracket.edit_bracket') }}">Edit Bracket</a>
                     {% endif %}
-                    <div class="round-details w3-border">{{ bracket.name }}</div>
+                    <div class="team round-details w3-border"><h2>{{ bracket.name }}</h2></div>
                     <br><br>
                     <div class="container">
                         <div class="split split-one">
@@ -59,7 +59,7 @@
                                 </ul>
                                 <br><br><br><br>
                                 <ul class="matchup">
-                                    <li class="team team-top">Wisconsin<span class="score"></span></li>
+                                    <li class="team team-top">4 Wisconsin<span class="score"></span></li>
                                     <li class="team team-top">Bemidji State<span class="score"></span></li>
                                 </ul>
                                 <br>
@@ -94,10 +94,12 @@
                     
                     <div class="champion">
                             <div class="semis-l current">
-                                <div class="round-details">Winner</div>		
-                                <ul class ="matchup championship">
-                                    <li class="w3-orange team team-top">{{ bracket.game15 }}</li>
-                                </ul>
+                                <fieldset>
+                                    <legend>Winner</legend>	
+                                    <ul class ="matchup championship">
+                                        <li class="w3-orange team team-top">{{ bracket.game15 }}</li>
+                                    </ul>
+                                </fieldset>
                             </div>
                             <div class="final current">
                                 <i class="fa fa-trophy"></i>
@@ -108,14 +110,14 @@
                                     <li class="team team-bottom">{{ bracket.game14 }}<span class="vote-count"></span></li>
                                 </ul>
                             </div>
-                            <div class="semis-r">		
-                                <div class="round-details">Final Score</div>	
-                                <!-- <ul class ="matchup championship"> -->
+                            <div class="semis-r">
+                                <fieldset>
+                                    <legend>Final Game Score</legend>
                                     <label for="w_goals">Winner goals</label><br>
-                                    <div name="w_goals"><span class="date">{{ bracket.w_goals }}</span></div>
+                                    <div name="w_goals"><span class="team team-top">{{ bracket.w_goals }}</span></div>
                                     <label for="l_goals">Loser goals</label><br>
-                                    <div name="l_goals"><span class="date">{{ bracket.l_goals }}</span></div>
-                                <!-- </ul> -->
+                                    <div name="l_goals"><span class="vote-count">{{ bracket.l_goals }}</span></div>
+                                </fieldset>
                             </div>	
                     </div>
                     
