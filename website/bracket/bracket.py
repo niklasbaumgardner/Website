@@ -294,32 +294,90 @@ def update_max(bracket, CORRECT_BRACKET):
     game10 = False
     game11 = False
     game12 = False
-    if CORRECT_BRACKET.game9 not in TEAMS and (game1 or game2 or bracket.game9 == CORRECT_BRACKET.game1 or bracket.game9 == CORRECT_BRACKET.game2) or bracket.game9 == CORRECT_BRACKET.game9:
+
+    if ((bracket.game9 == CORRECT_BRACKET.game9) 
+        or (CORRECT_BRACKET.game9 not in TEAMS and 
+            ((CORRECT_BRACKET.game1 not in TEAMS and bracket.game9 == bracket.game1)
+            or (CORRECT_BRACKET.game2 not in TEAMS and bracket.game9 == bracket.game2)
+            or (CORRECT_BRACKET.game1 in TEAMS and CORRECT_BRACKET.game1 == bracket.game9)
+            or (CORRECT_BRACKET.game2 in TEAMS and CORRECT_BRACKET.game2 == bracket.game9)))):
         max_points += 20
         game9 = True
-    if CORRECT_BRACKET.game10 not in TEAMS and (game3 or game4 or bracket.game10 == CORRECT_BRACKET.game3 or bracket.game10 == CORRECT_BRACKET.game4) or bracket.game10 == CORRECT_BRACKET.game10:
+
+    if ((bracket.game10 == CORRECT_BRACKET.game10) 
+        or (CORRECT_BRACKET.game10 not in TEAMS and 
+            ((CORRECT_BRACKET.game3 not in TEAMS and bracket.game10 == bracket.game3)
+            or (CORRECT_BRACKET.game4 not in TEAMS and bracket.game10 == bracket.game4)
+            or (CORRECT_BRACKET.game3 in TEAMS and CORRECT_BRACKET.game3 == bracket.game10)
+            or (CORRECT_BRACKET.game4 in TEAMS and CORRECT_BRACKET.game4 == bracket.game10)))):
         max_points += 20
         game10 = True
-    if CORRECT_BRACKET.game11 not in TEAMS and (game5 or game6 or bracket.game11 == CORRECT_BRACKET.game5 or bracket.game11 == CORRECT_BRACKET.game6) or bracket.game11 == CORRECT_BRACKET.game11:
+
+    if ((bracket.game11 == CORRECT_BRACKET.game11) 
+        or (CORRECT_BRACKET.game11 not in TEAMS and 
+            ((CORRECT_BRACKET.game5 not in TEAMS and bracket.game11 == bracket.game5)
+            or (CORRECT_BRACKET.game6 not in TEAMS and bracket.game11 == bracket.game6)
+            or (CORRECT_BRACKET.game5 in TEAMS and CORRECT_BRACKET.game5 == bracket.game11)
+            or (CORRECT_BRACKET.game6 in TEAMS and CORRECT_BRACKET.game6 == bracket.game11)))):
         max_points += 20
         game11 = True
-    if CORRECT_BRACKET.game12 not in TEAMS and game8 or game8 or (bracket.game12 == CORRECT_BRACKET.game7 or bracket.game12 == CORRECT_BRACKET.game8) or bracket.game12 == CORRECT_BRACKET.game12:
+
+    if ((bracket.game12 == CORRECT_BRACKET.game12) 
+        or (CORRECT_BRACKET.game12 not in TEAMS and 
+            ((CORRECT_BRACKET.game7 not in TEAMS and bracket.game12 == bracket.game7)
+            or (CORRECT_BRACKET.game8 not in TEAMS and bracket.game12 == bracket.game8)
+            or (CORRECT_BRACKET.game7 in TEAMS and CORRECT_BRACKET.game7 == bracket.game12)
+            or (CORRECT_BRACKET.game8 in TEAMS and CORRECT_BRACKET.game8 == bracket.game12)))):
         max_points += 20
         game12 = True
+        # or (bracket.game9 == CORRECT_BRACKET.game1 or bracket.game9 == CORRECT_BRACKET.game2) 
+        # or (bracket.game9 == bracket.game1 and CORRECT_BRACKET.game1 not in TEAMS)
+        # or (bracket.game9 == bracket.game2 and CORRECT_BRACKET.game2 not in TEAMS)
+    # if CORRECT_BRACKET.game9 not in TEAMS and (game1 or game2 or bracket.game9 == CORRECT_BRACKET.game1 or bracket.game9 == CORRECT_BRACKET.game2) or bracket.game9 == CORRECT_BRACKET.game9:
+    #     max_points += 20
+    #     game9 = True
+    # if CORRECT_BRACKET.game10 not in TEAMS and (game3 or game4 or bracket.game10 == CORRECT_BRACKET.game3 or bracket.game10 == CORRECT_BRACKET.game4) or bracket.game10 == CORRECT_BRACKET.game10:
+    #     max_points += 20
+    #     game10 = True
+    # if CORRECT_BRACKET.game11 not in TEAMS and (game5 or game6 or bracket.game11 == CORRECT_BRACKET.game5 or bracket.game11 == CORRECT_BRACKET.game6) or bracket.game11 == CORRECT_BRACKET.game11:
+    #     max_points += 20
+    #     game11 = True
+    # if CORRECT_BRACKET.game12 not in TEAMS and (game7 or game8 or bracket.game12 == CORRECT_BRACKET.game7 or bracket.game12 == CORRECT_BRACKET.game8) or bracket.game12 == CORRECT_BRACKET.game12:
+    #     max_points += 20
+    #     game12 = True
     print(max_points)
 
     # ROUND 3
     game13 = False
     game14 = False
-    if CORRECT_BRACKET.game13 not in TEAMS and (game9 or game10 or bracket.game13 == CORRECT_BRACKET.game9 or bracket.game13 == CORRECT_BRACKET.game10) or bracket.game13 == CORRECT_BRACKET.game13:
+
+    if ((bracket.game13 == CORRECT_BRACKET.game13)
+        or (CORRECT_BRACKET.game13 not in TEAMS and 
+            (game9 and bracket.game9 == bracket.game13
+            or game10 and bracket.game10 == bracket.game13))):
         max_points += 40
         game13 = True
-    if CORRECT_BRACKET.game14 not in TEAMS and (game11 or game12 or bracket.game14 == CORRECT_BRACKET.game11 or bracket.game14 == CORRECT_BRACKET.game12) or bracket.game14 == CORRECT_BRACKET.game14:
+    
+    if ((bracket.game14 == CORRECT_BRACKET.game14)
+        or (CORRECT_BRACKET.game14 not in TEAMS and 
+            ((game11 and bracket.game11 == bracket.game14)
+            or (game12 and bracket.game12 == bracket.game14)))):
         max_points += 40
         game14 = True
+    # if CORRECT_BRACKET.game13 not in TEAMS and (game9 or game10 or bracket.game13 == CORRECT_BRACKET.game9 or bracket.game13 == CORRECT_BRACKET.game10) or bracket.game13 == CORRECT_BRACKET.game13:
+    #     max_points += 40
+    #     game13 = True
+    # if CORRECT_BRACKET.game14 not in TEAMS and (game11 or game12 or bracket.game14 == CORRECT_BRACKET.game11 or bracket.game14 == CORRECT_BRACKET.game12) or bracket.game14 == CORRECT_BRACKET.game14:
+    #     max_points += 40
+    #     game14 = True
 
     # WINNER
-    if CORRECT_BRACKET.game15 not in TEAMS and (game13 or game14 or bracket.game15 == CORRECT_BRACKET.game13 or bracket.game15 == CORRECT_BRACKET.game14) or bracket.game15 == CORRECT_BRACKET.game15:
+    if ((bracket.game15 == CORRECT_BRACKET.game15)
+    or (CORRECT_BRACKET.game15 not in TEAMS and
+        ((game13 and bracket.game13 == bracket.game15)
+        or (game14 and bracket.game14 == bracket.game15)))):
         max_points += 80
+    # if CORRECT_BRACKET.game15 not in TEAMS and (game13 or game14 or bracket.game15 == CORRECT_BRACKET.game13 or bracket.game15 == CORRECT_BRACKET.game14) or bracket.game15 == CORRECT_BRACKET.game15:
+    #     max_points += 80
 
     return max_points
