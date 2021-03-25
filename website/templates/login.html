@@ -23,16 +23,16 @@
         <div class="w3-cell" style="width:20%"></div>
         <div class="w3-cell w3-mobile w3-margin-top w3-margin-bottom">
             {% with messages = get_flashed_messages(with_categories=true) %}
-                    {% if messages %}
-                        {% for category, message in messages %}
-                            <div class="w3-panel {{ category }} w3-display-container w3-border">
-                                <span onclick="this.parentElement.style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                                <h3>{{ message }}</h3>
-                                </button>
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-                {% endwith %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="w3-panel {{ category }} w3-display-container w3-border">
+                            <span onclick="this.parentElement.style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                            <h3>{{ message }}</h3>
+                            </button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
             <form class="w3-container w3-margin-bottom w3-light-grey w3-card-4" action="{{ url_for('auth.login_post') }}" method="POST">
     
                 <!-- <label class="" for="name"><h4 style="text-align: left;">Name</h4></label>

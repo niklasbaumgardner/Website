@@ -85,6 +85,9 @@ def standings():
 @bracket.route('/bracket/edit_bracket')
 @login_required
 def edit_bracket():
+    if datetime.now(TIMEZONE) > FIRST_GAME:
+        return redirect(url_for('bracket.view_bracket'))
+
     bracket = Bracket.query.filter_by(user_id=current_user.get_id()).first()
 
     return render_template("edit_bracket.html", bracket=bracket)
@@ -102,10 +105,8 @@ def view_bracket(id):
 
         elif current_user.is_authenticated:
             curr_user_id = int(current_user.get_id())
-            if id: # == curr_user_id:
+            if id:
                 bracket = Bracket.query.filter_by(id=id).first()
-                if bracket.user_id == curr_user_id:
-                    return render_template("view_bracket.html", bracket=bracket, user_id=curr_user_id)
                 return render_template("view_bracket.html", bracket=bracket)
             
             else:
@@ -124,23 +125,12 @@ def view_bracket(id):
     return redirect(url_for('auth.login'))
 
 
-
-    # if id:
-    #     bracket = Bracket.query.filter_by(id=id).first()
-    #     if current_user.is_authenticated:
-    #         return render_template("view_bracket.html", bracket=bracket, user_id=int(current_user.get_id()))
-    #     return render_template("view_bracket.html", bracket=bracket)
-    # else:
-    #     if current_user.is_authenticated:
-    #         bracket = Bracket.query.filter_by(user_id=current_user.get_id()).first()
-    #         return render_template("view_bracket.html", bracket=bracket, user_id=int(current_user.get_id()))
-            
-
-    # return redirect(url_for('bracket.standings'))
-
 @bracket.route('/bracket/submit_bracket', methods=['POST'])
 @login_required
 def submit_bracket():
+    if datetime.now(TIMEZONE) > FIRST_GAME:
+        return redirect(url_for('bracket.view_bracket'))
+
     game1 = request.form.get('game1')
     game2 = request.form.get('game2')
     game3 = request.form.get('game3')

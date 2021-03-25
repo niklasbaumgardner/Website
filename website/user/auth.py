@@ -8,6 +8,9 @@ auth = Blueprint('auth', __name__)
 
 @auth.route('/bracket/login')
 def login():
+    email = request.args.get('email')
+    if email:
+        return render_template('login.html', email=email)
     return render_template("login.html")
 
 @auth.route('/bracket/login', methods=["POST"])
@@ -47,7 +50,8 @@ def signup_post():
 
         if user:
             flash('Email already exists. Please log in', 'w3-pale-red')
-            return render_template("login.html", email=email)
+            return redirect(url_for('auth.login', email=email))
+            # return render_template("login.html", email=email)
 
         if password1 != password2:
             flash('Passwords don\'t match. Try again', 'w3-pale-red')
@@ -58,7 +62,8 @@ def signup_post():
         db.session.add(new_user)
         db.session.commit()
         flash('Sign up succesful', 'w3-pale-green')
-        return render_template("login.html", email=email)
+        # return render_template("login.html", email=email)
+        return redirect(url_for('auth.login'))
     
     except:
         flash('Sign up failed', 'w3-pale-red')
