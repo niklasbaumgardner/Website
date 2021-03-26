@@ -10,7 +10,7 @@ import os
 
 bracket = Blueprint('bracket', __name__)
 TIMEZONE = timezone('EST')
-FIRST_GAME = datetime(year=2021, month=3, day=26, hour=13, tzinfo=TIMEZONE)
+FIRST_GAME = datetime(year=2021, month=3, day=26, hour=13, minute=0, tzinfo=TIMEZONE)
 
 @bracket.route('/bracket/correct_bracket')
 @login_required
