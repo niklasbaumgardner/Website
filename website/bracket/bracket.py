@@ -75,11 +75,21 @@ def standings():
     brackets = Bracket.query.filter(Bracket.name != 'CORRECT_BRACKET').filter(Bracket.id !=0).all()
     brackets.sort(key=lambda b: b.max_points, reverse=True)
     brackets.sort(key=lambda b: b.points, reverse=True)
+    rank = 1
+    standings = []
+    for i, bracket in enumerate(brackets):
+        if i == 0:
+            standings.append((rank, bracket))
+        elif bracket.points == brackets[i - 1].points:
+            standings.append((rank, bracket))
+        else:
+            rank = i + 1
+            standings.append((i, bracket))
 
     if datetime.now(TIMEZONE) > FIRST_GAME:
         clickable = True
     
-    return render_template("standings.html", brackets=brackets, enumerate=enumerate, clickable=clickable)
+    return render_template("standings.html", brackets=standings, enumerate=enumerate, clickable=clickable)
 
 
 @bracket.route('/bracket/edit_bracket')
@@ -99,19 +109,15 @@ def view_bracket(id):
     # keep as if id:
 
     if datetime.now(TIMEZONE) > FIRST_GAME:
-        if id and not current_user.is_authenticated:
+        CORRECT_BRACKET = Bracket.query.filter_by(name='CORRECT_BRACKET', id=0).first()
+        if id:
             bracket = Bracket.query.filter_by(id=id).first()
-            return render_template("view_bracket.html", bracket=bracket)
+            return render_template("view_bracket.html", bracket=bracket, correct=CORRECT_BRACKET)
 
         elif current_user.is_authenticated:
             curr_user_id = int(current_user.get_id())
-            if id:
-                bracket = Bracket.query.filter_by(id=id).first()
-                return render_template("view_bracket.html", bracket=bracket)
-            
-            else:
-                bracket = Bracket.query.filter_by(user_id=curr_user_id).first()
-                return render_template("view_bracket.html", bracket=bracket)
+            bracket = Bracket.query.filter_by(user_id=curr_user_id).first()
+            return render_template("view_bracket.html", bracket=bracket, correct=CORRECT_BRACKET)
     else:
         if current_user.is_authenticated:
             curr_user_id = int(current_user.get_id())

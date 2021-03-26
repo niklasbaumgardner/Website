@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% block title %}Bracket{% endblock title %}
-{% block icon %}../static/images/nb.png{% endblock icon %}
 {% block bracket %}w3-text-blue{% endblock bracket %}
 
 
@@ -72,13 +71,13 @@
                             <div class="round round-two current">
                                 <div class="round-details">Round 2<br/><span class="date">March 27</span></div>			
                                 <ul class="matchup">
-                                    <li class="team team-top">{{ bracket.game1 }}<span class="score"></span></li>
-                                    <li class="team team-top">{{ bracket.game2 }}<span class="score"></span></li>
+                                    <li class="team team-top {% if correct and correct.game1 == bracket.game1 %}w3-pale-green{% elif correct and correct.game1 != 'None' and correct.game1 != bracket.game1 %}w3-pale-red{% endif %}">{{ bracket.game1 }}<span class="score"></span></li>
+                                    <li class="team team-top {% if correct and correct.game2 == bracket.game2 %}w3-pale-green{% elif correct and correct.game2 != 'None' and correct.game2 != bracket.game2 %}w3-pale-red{% endif %}">{{ bracket.game2 }}<span class="score"></span></li>
                                 </ul>
                                 <br><br><br><br><br><br>
                                 <ul class="matchup">
-                                    <li class="team team-top">{{ bracket.game3 }}<span class="score"></span></li>
-                                    <li class="team team-bottom">{{ bracket.game4 }}<span class="score"></span></li>
+                                    <li class="team team-top {% if correct and correct.game3 == bracket.game3 %}w3-pale-green{% elif correct and correct.game3 != 'None' and correct.game3 != bracket.game3 %}w3-pale-red{% endif %}">{{ bracket.game3 }}<span class="score"></span></li>
+                                    <li class="team team-bottom {% if correct and correct.game4 == bracket.game4 %}w3-pale-green{% elif correct and correct.game4 != 'None' and correct.game4 != bracket.game4 %}w3-pale-red{% endif %}">{{ bracket.game4 }}<span class="score"></span></li>
                                 </ul>
                             </div>	<!-- END ROUND TWO -->
                             
@@ -86,8 +85,8 @@
                                 <div class="round-details">Round 3<br/><span class="date">April 8</span></div>
                                 <br><br>	
                                 <ul class="matchup">
-                                    <li class="team team-top">{{ bracket.game9 }}<span class="score"></span></li>
-                                    <li class="team team-bottom">{{ bracket.game10 }}<span class="score"></span></li>
+                                    <li class="team team-top {% if correct and correct.game9 == bracket.game9 %}w3-pale-green{% elif correct and correct.game9 != 'None' and correct.game9 != bracket.game9 %}w3-pale-red{% endif %}">{{ bracket.game9 }}<span class="score"></span></li>
+                                    <li class="team team-bottom {% if correct and correct.game10 == bracket.game10 %}w3-pale-green{% elif correct and correct.game10 != 'None' and correct.game10 != bracket.game10 %}w3-pale-red{% endif %}">{{ bracket.game10 }}<span class="score"></span></li>
                                 </ul>
                             </div>	<!-- END ROUND THREE -->		
                         </div> 
@@ -97,7 +96,7 @@
                                 <fieldset>
                                     <legend>Winner</legend>	
                                     <ul class ="matchup championship">
-                                        <li class="w3-orange team team-top">{{ bracket.game15 }}</li>
+                                        <li class="team team-top {% if correct and correct.game15 == bracket.game15 %}w3-green{% elif correct and correct.game15 != 'None' and correct.game15 != bracket.game15 %}w3-red{% else %}w3-orange{% endif %}">{{ bracket.game15 }}</li>
                                     </ul>
                                 </fieldset>
                             </div>
@@ -106,8 +105,8 @@
                                 <div class="round-details">championship <br/><span class="date">April 10</span></div>
                                 
                                 <ul class ="matchup championship">
-                                    <li class="team team-top">{{ bracket.game13 }}<span class="vote-count"></span></li>
-                                    <li class="team team-bottom">{{ bracket.game14 }}<span class="vote-count"></span></li>
+                                    <li class="team team-top {% if correct and correct.game13 == bracket.game13 %}w3-pale-green{% elif correct and correct.game13 != 'None' and correct.game13 != bracket.game13 %}w3-pale-red{% endif %}">{{ bracket.game13 }}<span class="vote-count"></span></li>
+                                    <li class="team team-bottom {% if correct and correct.game14 == bracket.game14 %}w3-pale-green{% elif correct and correct.game14 != 'None' and correct.game14 != bracket.game14 %}w3-pale-red{% endif %}">{{ bracket.game14 }}<span class="vote-count"></span></li>
                                 </ul>
                             </div>
                             <div class="semis-r">
@@ -129,21 +128,21 @@
                                 <div class="round-details">Round 3<br/><span class="date">April 8</span></div>
                                 <br><br>					
                                 <ul class="matchup">
-                                    <li class="team team-top">{{ bracket.game11 }}<span class="score"></span></li>
-                                    <li class="team team-bottom">{{ bracket.game12 }}<span class="score"></span></li>
+                                    <li class="team team-top {% if correct and correct.game11 == bracket.game11 %}w3-pale-green{% elif correct and correct.game11 != 'None' and correct.game11 != bracket.game11 %}w3-pale-red{% endif %}">{{ bracket.game11 }}<span class="score"></span></li>
+                                    <li class="team team-bottom {% if correct and correct.game12 == bracket.game12 %}w3-pale-green{% elif correct and correct.game12 != 'None' and correct.game12 != bracket.game12 %}w3-pale-red{% endif %}">{{ bracket.game12 }}<span class="score"></span></li>
                                 </ul>
                             </div>	<!-- END ROUND THREE -->	
                     
                             <div class="round round-two current">
                                 <div class="round-details">Round 2<br/><span class="date">March 28</span></div>						
                                 <ul class="matchup">
-                                    <li class="team team-top">{{ bracket.game5 }}<span class="score"></span></li>
-                                    <li class="team team-bottom">{{ bracket.game6 }}<span class="score"></span></li>
+                                    <li class="team team-top {% if correct and correct.game5 == bracket.game5 %}w3-pale-green{% elif correct and correct.game5 != 'None' and correct.game5 != bracket.game5 %}w3-pale-red{% endif %}">{{ bracket.game5 }}<span class="score"></span></li>
+                                    <li class="team team-bottom {% if correct and correct.game6 == bracket.game6 %}w3-pale-green{% elif correct and correct.game6 != 'None' and correct.game6 != bracket.game6 %}w3-pale-red{% endif %}">{{ bracket.game6 }}<span class="score"></span></li>
                                 </ul>
                                 <br><br><br><br><br><br>
                                 <ul class="matchup">
-                                    <li class="team team-top">{{ bracket.game7 }}<span class="score"></span></li>
-                                    <li class="team team-bottom">{{ bracket.game8 }}<span class="score"></span></li>
+                                    <li class="team team-top {% if correct and correct.game7 == bracket.game7 %}w3-pale-green{% elif correct and correct.game7 != 'None' and correct.game7 != bracket.game7 %}w3-pale-red{% endif %}">{{ bracket.game7 }}<span class="score"></span></li>
+                                    <li class="team team-bottom {% if correct and correct.game8 == bracket.game8 %}w3-pale-green{% elif correct and correct.game8 != 'None' and correct.game8 != bracket.game8 %}w3-pale-red{% endif %}">{{ bracket.game8 }}<span class="score"></span></li>
                                 </ul>
                             </div>	<!-- END ROUND TWO -->
                             <div class="round round-one current">
