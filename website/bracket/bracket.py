@@ -84,7 +84,7 @@ def standings():
             standings.append((rank, bracket))
         else:
             rank = i + 1
-            standings.append((i, bracket))
+            standings.append((rank, bracket))
 
     print(datetime.now(TIMEZONE), FIRST_GAME)
     if datetime.now(TIMEZONE) > FIRST_GAME:
