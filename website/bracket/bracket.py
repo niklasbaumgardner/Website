@@ -167,29 +167,29 @@ def submit_bracket():
     existing_bracket = Bracket.query.filter_by(user_id=current_user.get_id()).first()
 
     if existing_bracket:
-        # existing_bracket.game1 = new_bracket.game1
+        existing_bracket.game1 = new_bracket.game1
         existing_bracket.game2 = new_bracket.game2
-        # existing_bracket.game3 = new_bracket.game3
-        # existing_bracket.game4 = new_bracket.game4
-        # existing_bracket.game5 = new_bracket.game5
-        # existing_bracket.game6 = new_bracket.game6
-        # existing_bracket.game7 = new_bracket.game7
-        # existing_bracket.game8 = new_bracket.game8
+        existing_bracket.game3 = new_bracket.game3
+        existing_bracket.game4 = new_bracket.game4
+        existing_bracket.game5 = new_bracket.game5
+        existing_bracket.game6 = new_bracket.game6
+        existing_bracket.game7 = new_bracket.game7
+        existing_bracket.game8 = new_bracket.game8
         existing_bracket.game9 = new_bracket.game9
-        # existing_bracket.game10 = new_bracket.game10
-        # existing_bracket.game11 = new_bracket.game11
-        # existing_bracket.game12 = new_bracket.game12
+        existing_bracket.game10 = new_bracket.game10
+        existing_bracket.game11 = new_bracket.game11
+        existing_bracket.game12 = new_bracket.game12
         existing_bracket.game13 = new_bracket.game13
-        # existing_bracket.game14 = new_bracket.game14
+        existing_bracket.game14 = new_bracket.game14
         existing_bracket.game15 = new_bracket.game15
 
-        # existing_bracket.w_goals = new_bracket.w_goals
-        # existing_bracket.l_goals = new_bracket.l_goals
+        existing_bracket.w_goals = new_bracket.w_goals
+        existing_bracket.l_goals = new_bracket.l_goals
 
         existing_bracket.name = new_bracket.name
 
-        # existing_bracket.max_points = new_bracket.max_points
-        # existing_bracket.points = new_bracket.points
+        existing_bracket.max_points = new_bracket.max_points
+        existing_bracket.points = new_bracket.points
 
         db.session.commit()
     

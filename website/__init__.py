@@ -8,13 +8,10 @@ from website.commands import create_tables
 # from numpy import random as rand
 from website.extensions import db, login_manager
 import psycopg2
-
 import os
 
-# db = SQLAlchemy()
 mail = Mail()
 bcrypt = Bcrypt()
-# login_manager = LoginManager()
 
 def create_app():
     app = Flask(__name__)
@@ -47,10 +44,5 @@ def create_app():
     from website.steganography.steganography_web import steganography_web as steganography_blueprint
     app.register_blueprint(steganography_blueprint)
 
-    app.cli.add_command(create_tables)
-
-    # conn = psycopg2.connect(os.environ.get('DATABASE_URL'), sslmode='require')
 
     return app
-
-# my_app = create_app()
