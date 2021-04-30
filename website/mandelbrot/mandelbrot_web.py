@@ -26,7 +26,7 @@ def mandelbrot():
         imaginary = float(request.values['i'])
         
         image = create(real, imaginary)
-        filename = 'static/images/' + str(session['uid']) + 'fractal.png'
+        filename = 'website/static/images/' + str(session['uid']) + 'fractal.png'
         # image.save('static/images/fractal.png')
         image.save(filename)
 
@@ -38,7 +38,7 @@ def mandelbrot():
             scheduler.add_job(delete_file, args=[filename], trigger='date', run_date=time, id=filename)
             print(f'job scheduled for {time}')
 
-        return render_template("mandelbrot.html", image='/' + filename + '?' + str(rand.randint(1000)), real=real, imag=imaginary)
+        return render_template("mandelbrot.html", image='/' + filename[8:] + '?' + str(rand.randint(1000)), real=real, imag=imaginary)
 
     else:
         return render_template("mandelbrot.html", image='/static/images/defaultFractal.png', real=0, imag=0)
