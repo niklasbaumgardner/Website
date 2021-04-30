@@ -63,10 +63,13 @@ def encode_compute():
 def decode():
     hidden = 'hidden'
     message = ''
-    
-    if 'message' in request.values:
-        message = request.values['message']
+
+    show = False
+    if 'show' in request.values and request.values['show'] == 'True':
+        show = True
+        message = session['steganography_message']
         hidden = ''
+        # session.pop('steganography_message')
         
     return render_template("decode.html", hidden=hidden, message=message)
 
@@ -80,7 +83,9 @@ def decode_compute():
     binary_string = decode_image(image)
     message = decode_string(binary_string)
 
-    return redirect(url_for('steganography_web.decode', message=message))
+    session['steganography_message'] = message
+
+    return redirect(url_for('steganography_web.decode', show=True))
 
 
 def delete_file(filename):
