@@ -16,14 +16,14 @@
             <div class="w3-cell-row">
                 <div class="w3-container w3-cell" style="width:15%"></div>
                 <div class="w3-container w3-cell w3-mobile" style="width:35%">
-                    <a href="{{ url_for('mandelbrot_web.mandelbrot') }}"><img class="w3-circle w3-margin-bottom" width="200px" height="200px" src="/static/images/mandelbrot.png" alt="Mandelbrot Fractal photo"></a>
+                    <a href="https://niklasgolfapp.herokuapp.com/" target="_blank"><img class="w3-circle w3-margin-bottom" width="200px" height="200px" src="/static/images/handicap.png" alt="Mandelbrot Fractal photo"></a>
                     <!-- <h5><a href="{{ url_for('mandelbrot_web.mandelbrot') }}">Mandelbrot Fractals</a></h5> -->
-                    <h5 style="text-decoration: underline;">Mandelbrot Fractals</h5>
+                    <h5 style="text-decoration: underline;">Handicap Calculator Golf</h5>
                     <p class="left">
-                        This project will create Mandelbrot fractal images. You can enter in the initial values or the initial values can be generated randomly. 
-                        I created this as a personal project.
+                        Web application to keep track of the rounds of golf you've played and calculate your handicap.
+                        <br><br>
+                        Check it out <a class="w3-text-dark-green" href="https://niklasgolfapp.herokuapp.com/" target="_blank">HERE</a>
                         <br>
-                        <form action="{{ url_for('mandelbrot_web.mandelbrot') }}"><input class="w3-button w3-blue" type="submit" value="Try it here"></form>
                     </p>
                 </div>
                 <br>
@@ -33,30 +33,54 @@
                     <!-- <h5><a href="{{ url_for('steganography_web.steganography') }}">Steganographer</a></h5> -->
                     <h5 style="text-decoration: underline;">Steganographer</h5>
                     <p class="left">
-                        This project is a steganographer. Upload a picture and type a message you want to hide in the image and an image with the message encode will be returned. 
-                        There is also an option to decode a message from an image. I created this as a personal project.
-                        <br>
-                        <form action="{{ url_for('steganography_web.steganography') }}"><input class="w3-button w3-blue" type="submit" value="Try it here"></form>
+                        This will hide a message within an image. Just input a message and an image and you will have a new image with a hidden message.
+                        You can also decode and image that already has a hidden message inside.
+                        <br><br>
+                        Check it out <a class="w3-text-blue" href="{{ url_for('steganography_web.steganography') }}" target="_blank">HERE</a>
+                        <!-- <form action="{{ url_for('steganography_web.steganography') }}"><input class="w3-button w3-blue" type="submit" value="Check it out here"></form> -->
                     </p>
                 </div>
                 <div class="w3-container w3-cell" style="width:15%"></div>
             </div>
-            <!-- <br> -->
         </div>
         
     </div>
 
 
     <div class="w3-cell-row w3-margin-bottom w3-padding-32 w3-light-grey">
-        <div class="w3-container">
+        <!-- <div class="w3-container">
             <h1>More Projects</h1>
             <br>
-        </div>
+        </div> -->
 
         <div class="w3-container">
             <div class="w3-cell-row">
                 <div class="w3-container w3-cell" style="width:15%"></div>
                 <div class="w3-container w3-cell w3-mobile" style="width:35%">
+                    <a href="{{ url_for('mandelbrot_web.mandelbrot') }}"><img class="w3-circle w3-margin-bottom" width="200px" height="200px" src="/static/images/mandelbrot.png" alt="Mandelbrot Fractal photo"></a>
+                    <!-- <h5><a href="{{ url_for('mandelbrot_web.mandelbrot') }}">Mandelbrot Fractals</a></h5> -->
+                    <h5 style="text-decoration: underline;">Mandelbrot Fractals</h5>
+                    <p class="left">
+                        This project will create Mandelbrot fractal images. You can enter in the initial values or the initial values can be generated randomly. 
+                        I created this as a personal project.
+                        <br><br>
+                        Check it out <a class="w3-text-blue" href="{{ url_for('mandelbrot_web.mandelbrot') }}" target="_blank">HERE</a>
+                        <!-- <form action="{{ url_for('mandelbrot_web.mandelbrot') }}"><input class="w3-button w3-blue" type="submit" value="Check it out here"></form> -->
+                    </p>
+                </div>
+                <br>
+                <!-- TODO: need to add margins here for mobile version -->
+                <div class="w3-container w3-cell w3-mobile" style="width:35%">
+                    <p><img class="w3-circle w3-margin-bottom" width="200px" height="200px" src="/static/images/firefox.png" alt="Firefox photo"></p>
+                    <!-- <h5><a href="{{ url_for('steganography_web.steganography') }}">Steganographer</a></h5> -->
+                    <h5 style="text-decoration: underline;">Firefox Contributor</h5>
+                    <p class="left">
+                        Worked on the Picture-in-Picture feature of Firefox. I added the feature that remembers the previous size and location 
+                        of the PIP window and uses that for the next PIP window. 
+                        <br>
+                    </p>
+                </div>
+                <!-- <div class="w3-container w3-cell w3-mobile" style="width:35%">
                     <p><img class="w3-circle w3-margin-bottom" width="200px" height="200px" src="/static/images/CanadianExperience.gif" alt="Canadian Experience gif"></p>
                     <h5 style="text-decoration: underline;">Canadian Experience</h5>
                     <p class="left">
@@ -78,39 +102,49 @@
                         of having to contact the team and wait for a response.
                         I created this during my internship with Humana.
                     </p>
-                </div>
+                </div> -->
                 <div class="w3-container w3-cell" style="width:15%"></div>
             </div>
             <br><br>
-            <div class="w3-cell-row w3-margin-bottom">
-                <div class="w3-container w3-cell" style="width:15%"></div>
-                <div class="w3-container w3-cell w3-mobile w3-margin-bottom" style="width:35%">
-                    <p><img class="w3-circle w3-margin-bottom" width="200px" height="200px" src="/static/images/WhoMurderedMyGrade.png" alt="Who Murdered My Grade photo"></p>
-                    <h5 style="text-decoration: underline;">Who Murdered My Grade?</h5>
-                    <p class="left">
-                        Who Murdered My Grade? is a Clue inspired remote multiplayer game. Users must create an account and login to play. 
-                        Games are played with 2-6 users from different browsers. The web application uses websockets to keep each user in the same game state. 
-                        The goal is to accuse the correct professor of the correct "crime" from the clues.
-                        I created this for a group school project.
-                        <br>Click <a href="http://webdev.cse.msu.edu/~baumga91/project2/" target="_blank">here</a> to play the game and <a href="https://github.com/niklasbaumgardner/WhoMurderedMyGrade" target="_blank">here</a> to view the code.
-                        <br><br>
-                    </p>
-                </div>
-                <br>
-                <div class="w3-container w3-cell w3-mobile w3-margin-bottom" style="width:35%">
-                    <p><img class="w3-circle w3-margin-bottom" width="200px" height="200px" src="/static/images/UMLWars.gif" alt="UML Wars gif"></p>
-                    <h5 style="text-decoration: underline;">UML Wars</h5>
-                    <p class="left">
-                        UML Wars is a Space Invaders inspired game where UML classes fall from the top of the screen and a grader at the bottom of the screen will
-                        "grade" the falling UML classes by shooting the red pen at the UML classes. The goal is to shoot all of the bad UML.
-                        I created this for a group school project.
-                        <br>Click <a href="https://github.com/niklasbaumgardner/UMLWars" target="_blank">here</a> to view the code.
-                    </p>
-                </div>
-                <div class="w3-container w3-cell" style="width:15%"></div>
-            </div>
+            
         </div>
         
     </div>
 
+    <div class="w3-cell-row w3-margin-bottom w3-padding-32">
+
+        <div class="w3-container">
+            <div class="w3-cell-row">
+                <div class="w3-cell-row w3-margin-bottom">
+                        <div class="w3-container w3-cell" style="width:15%"></div>
+                        <div class="w3-container w3-cell w3-mobile w3-margin-bottom" style="width:35%">
+                            <p><img class="w3-circle w3-margin-bottom" width="200px" height="200px" src="/static/images/WhoMurderedMyGrade.png" alt="Who Murdered My Grade photo"></p>
+                            <h5 style="text-decoration: underline;">Who Murdered My Grade?</h5>
+                            <p class="left">
+                                Who Murdered My Grade? is a Clue inspired remote multiplayer game. Users must create an account and login to play. 
+                                Games are played with 2-6 users from different browsers. The web application uses websockets to keep each user in the same game state. 
+                                The goal is to accuse the correct professor of the correct "crime" from the clues.
+                                I created this for a group school project.
+                                <br>Click <a href="http://webdev.cse.msu.edu/~baumga91/project2/" target="_blank">HERE</a> to play the game and <a href="https://github.com/niklasbaumgardner/WhoMurderedMyGrade" target="_blank">HERE</a> to view the code.
+                                <br><br>
+                            </p>
+                        </div>
+                        <br>
+                        <div class="w3-container w3-cell w3-mobile w3-margin-bottom" style="width:35%">
+                            <p><img class="w3-circle w3-margin-bottom" width="200px" height="200px" src="/static/images/UMLWars.gif" alt="UML Wars gif"></p>
+                            <h5 style="text-decoration: underline;">UML Wars</h5>
+                            <p class="left">
+                                UML Wars is a Space Invaders inspired game where UML classes fall from the top of the screen and a grader at the bottom of the screen will
+                                "grade" the falling UML classes by shooting the red pen at the UML classes. The goal is to shoot all of the bad UML.
+                                I created this for a group school project.
+                                <br>Click <a href="https://github.com/niklasbaumgardner/UMLWars" target="_blank">HERE</a> to view the code.
+                            </p>
+                        </div>
+                        <div class="w3-container w3-cell" style="width:15%"></div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock content %}
+
