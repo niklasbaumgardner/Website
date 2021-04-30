@@ -27,7 +27,7 @@ def encode():
     show = False
     if 'show' in request.values and request.values['show'] == 'True':
         show = True
-        img = '/' + session['steganography_image'] + '?' + str(rand.randint(1000))
+        img = '/' + session['steganography_image'][8:] + '?' + str(rand.randint(1000))
     
     return render_template("encode.html", image=img, show=show)
 
@@ -41,7 +41,7 @@ def encode_compute():
     if not message or not image:
         return redirect(url_for('steganography_web.encode'))
     
-    filename = 'static/images/' + str(session['uid']) + image.filename.split('.')[0] + '.png'
+    filename = 'website/static/images/' + str(session['uid']) + image.filename.split('.')[0] + '.png'
     image.save(filename)
     session['steganography_image'] = filename
     
