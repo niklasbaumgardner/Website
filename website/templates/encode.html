@@ -31,7 +31,7 @@
             <p>Click the image to download</p>
             <br><br><br>
             <a class="w3-button w3-light-grey" href="{{ url_for('steganography_web.encode') }}">Encode another image</a>
-            <a class="w3-button w3-light-blue" href="{{ url_for('steganography_web.decode') }}">Decode this or another image</a>
+            <a class="w3-button w3-dark-grey" href="{{ url_for('steganography_web.decode') }}">Decode this or another image</a>
 
         {% else %}
             <form class="w3-container" action="{{ url_for('steganography_web.encode_compute') }}" method="POST" enctype="multipart/form-data">
