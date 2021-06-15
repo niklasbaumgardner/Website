@@ -10,6 +10,8 @@ import os
 
 steganography_web = Blueprint('steganography_web', __name__)
 
+END_OF_ENCODE = 'CTRL+END'
+
 
 @steganography_web.route("/projects/steganography/", methods=["GET"])
 def steganography():
@@ -45,7 +47,7 @@ def encode_compute():
     image.save(filename)
     session['steganography_image'] = filename
     
-    binary_string = encode_string(message)
+    binary_string = encode_string(message) + encode_string(END_OF_ENCODE)
     image = encode_image(filename, binary_string)
 
     time = datetime.datetime.now() + datetime.timedelta(minutes = 4)
@@ -94,27 +96,25 @@ def delete_file(filename):
 
 
 def open_image(image_name):
-    # print('here', image_name)
     x = True
     while x == True:
         try:
             fp = Image.open(image_name)
             x = False
         except:
-            # print('here', image_name)
             print('File not found.', image_name, x)
             fp = None
             break
-            # image_name = input("The name of the image file: ")
     return fp, image_name
 
 
 def encode_string(string):
+    # string += END_OF_ENCODE
     bi_string = ''
     for ch in string:
         num = to_binary(ord(ch))
         bi_string += str(num).zfill(8)
-    bi_string += '010000110111010001110010011011000010110101000100'
+    # bi_string += '010000110111010001110010011011000010110101000100'
 
     return bi_string
 
@@ -126,7 +126,7 @@ def decode_string(bi_string):
         string += chr(to_decimal(bi_string[count:count+8]))
         count += 8
 
-    string = string[:-7]
+    string = string[:-9]
     return string
 
 
@@ -181,6 +181,7 @@ def encode_image(image, bi_string):
 
 def decode_image(image):
     # TODO: will probably need to edit this function
+    end_of_encode_string = encode_string(END_OF_ENCODE) 
     im, image = open_image(image)
     w, h = im.size
     pix = im.load()
@@ -197,7 +198,8 @@ def decode_image(image):
             bi_string += g[-1:]
             bi_string += b[-1:]
 
-            if '010000110111010001110010011011000010110101000100' in bi_string:
+            # if '010000110111010001110010011011000010110101000100' in bi_string:
+            if end_of_encode_string in bi_string:
                 return bi_string
 
     return 'No message was found'
