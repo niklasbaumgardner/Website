@@ -141,6 +141,7 @@ def encode_image(image, bi_string):
                 break
         for j in range(h):
             rgb = pix[i,j]
+
             r = to_binary(rgb[0])
             g = to_binary(rgb[1])
             b = to_binary(rgb[2])

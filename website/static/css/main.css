@@ -72,3 +72,11 @@ html, body {
 .left {
     text-align: left;
 }
+
+.preserve_string {
+    white-space: pre-wrap;
+}
+
+.message {
+    text-align: left;
+}
