@@ -42,7 +42,7 @@
                 <form action="{{ url_for('steganography_web.decode_compute') }}" method="POST" enctype="multipart/form-data">
                     <br>
                     <label for="img">Select image to decode:</label>
-                    <input type="file" id="img" name="img" accept="image/png" required><br><br>
+                    <input type="file" id="img" name="img" accept="image/jpg, image/jpeg, image/png" required><br><br>
                     <input class="w3-button w3-blue" type="submit">
                 </form>
             {% endif %}
