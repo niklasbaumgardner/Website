@@ -11,6 +11,7 @@ import os
 steganography_web = Blueprint('steganography_web', __name__)
 
 END_OF_ENCODE = 'CTRL+END'
+OLD_EOE = '010000110111010001110010011011000010110101000100'
 
 
 @steganography_web.route("/projects/steganography/", methods=["GET"])
@@ -200,7 +201,7 @@ def decode_image(image):
             bi_string += b[-1:]
 
             # if '010000110111010001110010011011000010110101000100' in bi_string:
-            if end_of_encode_string in bi_string:
+            if end_of_encode_string in bi_string or OLD_EOE in bi_string:
                 return bi_string
 
     return 'No message was found'
