@@ -4,6 +4,82 @@
 
 {% block content %}
 
+<style>
+    .file-area {
+        width: 100%;
+        position: relative;
+        font-size: 18px;
+    }
+    .file-area input[type=file] {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0;
+        cursor: pointer;
+    }
+    .file-area .file-dummy {
+        width: 100%;
+        padding: 50px 30px;
+        border: 2px dashed #ccc;
+        background-color: #fff;
+        text-align: center;
+        transition: background 0.3s ease-in-out;
+    }
+    .file-area .file-dummy .success {
+        display: none;
+    }
+    .file-area:hover .file-dummy {
+        border: 2px dashed #1abc9c;
+    }
+    .file-area input[type=file]:valid + .file-dummy {
+        border-color: #1abc9c;
+    }
+    .file-area input[type=file]:valid + .file-dummy .success {
+        display: inline-block;
+    }
+    .file-area input[type=file]:valid + .file-dummy .default {
+        display: none;
+    }
+</style>
+
+<script>
+    // function dropHandler(ev) {
+    //     console.log('File(s) dropped');
+
+    //     // Prevent default behavior (Prevent file from being opened)
+    //     ev.preventDefault();
+
+    //     if (ev.dataTransfer.items) {
+    //         // Use DataTransferItemList interface to access the file(s)
+    //         for (var i = 0; i < ev.dataTransfer.items.length; i++) {
+    //             // If dropped items aren't files, reject them
+    //             if (ev.dataTransfer.items[i].kind === 'file') {
+    //                 var file = ev.dataTransfer.items[i].getAsFile();
+    //                 console.log('... file[' + i + '].name = ' + file.name, "nik");
+    //                 document.getElementById('img').value = file;
+    //             }
+    //         }
+    //     } else {
+    //         // Use DataTransfer interface to access the file(s)
+    //         for (var i = 0; i < ev.dataTransfer.files.length; i++) {
+    //             console.log('... file[' + i + '].name = ' + ev.dataTransfer.files[i].name);
+    //         }
+    //     }
+    // }
+
+    // function dragOverHandler(ev) {
+    //     console.log('File(s) in drop zone');
+
+    //     // Prevent default behavior (Prevent file from being opened)
+    //     ev.preventDefault();
+    // }
+
+</script>
+
 
     <div class="w3-cell-row w3-mobile w3-padding-64">
 
@@ -40,9 +116,18 @@
                 <a class="w3-button w3-dark-grey" href="{{ url_for('steganography_web.decode') }}">Decode another Image</a>
             {% else %}
                 <form action="{{ url_for('steganography_web.decode_compute') }}" method="POST" enctype="multipart/form-data">
+                    <!-- <label for="img">Select image to decode:</label> -->
+                    <div class="form-group file-area">
+                        <!-- <label for="images">Images <span>Your images should be at least 400x300 wide</span></label> -->
+                        <input type="file" name="img" id="img" required="required" multiple="multiple" accept="image/jpg, image/jpeg, image/png"/>
+                        <div class="file-dummy">
+                        <div class="success">Great, your files are selected. Keep on.</div>
+                        <div class="default">Click to select a file, or drag it here</div>
+                        </div>
+                    </div>
+                    
                     <br>
-                    <label for="img">Select image to decode:</label>
-                    <input type="file" id="img" name="img" accept="image/jpg, image/jpeg, image/png" required><br><br>
+                    <!-- <input type="file" id="img" name="img" accept="image/jpg, image/jpeg, image/png" required><br><br> -->
                     <input class="w3-button w3-blue" type="submit">
                 </form>
             {% endif %}
