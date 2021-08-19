@@ -3,7 +3,8 @@ import uuid
 from apscheduler.schedulers.background import BackgroundScheduler
 import datetime
 from numpy import random as rand
-# import python_files.steganography as steg
+from twilio.rest import Client
+import time
 from PIL import Image
 import os
 
@@ -59,6 +60,7 @@ def encode_compute():
         scheduler.add_job(delete_file, args=[filename], trigger='date', run_date=time, id=filename)
         print(f'job scheduled for {time}')
     
+    send_days_left_text()
     return redirect(url_for('steganography_web.encode', show='True'))
 
 
@@ -88,7 +90,37 @@ def decode_compute():
 
     session['steganography_message'] = message
 
+    send_days_left_text()
     return redirect(url_for('steganography_web.decode', show=True))
+
+
+def send_days_left_text():
+    ALYSSA = '+16165501654'
+    NIKLAS = '+16169013991'
+
+    SENDER = '+12017620231'
+
+    MEET_DATE = datetime.datetime(2021, 10, 14, hour=23)
+
+    account_sid = 'ACa30d128870c3419c7b96780cd690e44d'
+    auth_token = 'ff9cb837670b6dbe492516cdcb594f74'
+
+    client = Client(account_sid, auth_token)
+
+    today = datetime.datetime.now()
+    days_left = MEET_DATE - today
+    message = f'\n{days_left.days} days, {days_left.seconds//3600} hours, and {(days_left.seconds//60)%60} minutes until we meet babe!'
+    print(message)
+
+    client.api.account.messages.create(
+        to=NIKLAS,
+        from_=SENDER,
+        body=message)
+
+    client.api.account.messages.create(
+        to=ALYSSA,
+        from_=SENDER,
+        body=message)
 
 
 def delete_file(filename):
