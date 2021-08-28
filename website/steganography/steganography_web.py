@@ -100,7 +100,7 @@ def send_days_left_text():
 
     SENDER = '+12017620231'
 
-    MEET_DATE = datetime.datetime(2021, 10, 14, hour=23)
+    MEET_DATE = datetime.datetime(2021, 9, 28, hour=20)
 
     account_sid = os.environ.get('account_sid')
     auth_token = os.environ.get('auth_token')
