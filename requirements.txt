@@ -28,4 +28,4 @@ SQLAlchemy==1.4.2
 twilio==6.63.0
 tzlocal==2.1
 urllib3==1.26.6
-Werkzeug==1.0.1
+Werkzeug==2.2.3
